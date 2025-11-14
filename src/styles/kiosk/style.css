@@ -1,3 +1,4 @@
+/* ======================= kiosk ======================= */
 .kiosk {
     /* 배경색 설정 */
     background-color: #ffffff;
@@ -5,133 +6,12 @@
     display: flex;
     /* 자식 요소들 세로 방향으로 정렬 */
     flex-direction: column;
-    /* 자식 요소들 사이에 40px 간격 설정 */
-    gap: 40px;
-    /* 요소의 너비 설정 */
-    width: 580px;
-    /* 요소의 높이를 화면 전체 높이로 설정 */
-    height: 100vh;
+    /* %는 부모 요소의 높이를 기준으로 % 계산.
+    vh는 브라우저 자체 높이를 기준으로 % 계산 */
+    width: 100%;
+
+    height: 100vh; /* 내용 기준으로 크고 */
+    min-height: 100vh; /* 그래도 최소한 화면 한 장은 채워라 */
     /* 좌우 마진 자동 설정하여 가로 가운데 정렬 */
     margin: 0 auto;
-    /* 위아래는 40px, 좌우 24px 내부 여백 */
-    padding: 40px 24px;
-    /* padding과 border를 포함한 전체 크기를 width와 height에 맞추도록 설정함 */
-    box-sizing: border-box;
-}
-
-/* 메인 섹션 */
-.kiosk .section-main {
-    display: flex;
-    /* 자식 요소들 세로 방향으로 정렬 */
-    flex-direction: column;
-    /* 자식 요소들을 가로 방향으로 가운데 정렬 */
-    align-items: center;
-    /* 자식 요소들 사이에 24px 간격을 둠 */
-    gap: 24px;
-    flex: 1; /* 위/아래 섹션 비율 배분용 */
-    margin: 0 auto; /* ⬅️ 수평 가운데 정렬 */
-}
-
-/* 타이틀 반응형 폰트로 설정 */
-.kiosk .title {
-    color: #fe6c50;
-    font-family: 'Press Start 2P', Helvetica;
-    font-size: clamp(24px, 5vw, 40px);
-    font-weight: 400;
-    letter-spacing: 2px;
-    white-space: nowrap;
-}
-
-/* 이미지도 화면 폭에 따라 줄어들도록 설정 */
-.kiosk .img-insaroad {
-    aspect-ratio: 1;
-    width: min(60vw, 305px); /* 화면 넓이 60% 또는 최대 305px */
-    height: auto;
-    object-fit: cover;
-}
-
-/* 버튼 섹션: 고정 width가 아니라 내부에서 정렬하도록 설정 
-    - section-btns 요소가 부모 요소인 .kiosk 안에서 너비 제한 없이 배치되고, 그 안에서 자식 요소들을 가운데 정렬한다는 의미
-*/
-.kiosk .section-btns {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 24px;
-}
-
-/* ----- kiosk-btn ----- */
-.kiosk-btn {
-    position: relative;
-    width: 332px;
-    height: 53px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-    touch-action: manipulation;
-
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-}
-
-/* 브라우저 기본 outline 제거 */
-.kiosk-btn:focus {
-    outline: none;
-}
-
-/* 버튼이 focus될 때 */
-.kiosk-btn:focus {
-    outline: none; /* 선 형태 outline 제거 */
-    border-radius: 20px;
-
-    /* 외곽 glow (부드럽게 퍼지는 효과) */
-    box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.06),
-        /* 기본 깊이감 유지 */ 0 0 0 10px rgba(254, 108, 80, 0.1),
-        /* 흐릿한 첫번째 링 */ 0 0 28px 16px rgba(254, 108, 80, 0.15); /* 퍼지는 블러 글로우 */
-}
-
-.kiosk-btn .btn-text {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    text-align: center;
-    line-height: 53px;
-    font-family: 'Press Start 2P', Helvetica, sans-serif;
-    font-size: 15px;
-    color: #000;
-}
-
-.kiosk-btn .btn-background-long {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-@media (max-width: 480px) {
-    .kiosk {
-        padding: 24px 16px;
-        gap: 24px;
-    }
-
-    .kiosk .title {
-        font-size: clamp(20px, 6vw, 28px);
-        letter-spacing: 1px;
-    }
-
-    .kiosk-btn {
-        height: 48px;
-    }
-
-    .kiosk-btn .btn-text {
-        line-height: 48px;
-        font-size: 13px;
-    }
 }
