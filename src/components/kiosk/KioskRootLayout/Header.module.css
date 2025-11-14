@@ -1,0 +1,21 @@
+/* ======================= header ======================= */
+.header {
+    display: flex;
+    gap: 31px;
+    flex: 0 0 12.85%; /* 상단 12.85% 차지 */
+    width: 100%;
+}
+.title {
+    color: #fe6c50;
+    font-family: 'Press Start 2P', Helvetica;
+    /* clamp() : 최소값/선호값/20px
+        - 최대/최소 글자 크기를 지정하며, 선호값은 화면 너비의 n%를 기준으로 글자 크기가 변하게 하는 것임
+    */
+    font-size: clamp(12px, 4vw, 20px);
+    font-weight: 400;
+    height: 30%;
+    letter-spacing: 2px;
+    line-height: normal;
+    margin-top: 35px;
+    width: 60%;
+}

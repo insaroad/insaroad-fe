@@ -7,7 +7,8 @@ import React, {
 } from 'react';
 import btnBackgroundLong from '@/assets/kiosk/btn-background-long.svg';
 import { getKioskButtonStyle } from '@/utils/kiosk/getKiosButtonStyle';
-// import { getKioskButtonStyle } from '@/utils/kioskButtonStyle';
+
+import styles from './LongButton.module.css';
 
 /* [ ButtonHTMLAttributes<HTMLButtonElement> ]
 -> react에서 사용되는 타입들 중 하나
@@ -26,10 +27,7 @@ interface KioskLongButtonProp extends ButtonHTMLAttributes<HTMLButtonElement> {
 - 키오스크에서 사용되는 긴 버튼 컴포넌트
 
 */
-export default function KioskLongButton({
-    text,
-    ...rest
-}: KioskLongButtonProp): JSX.Element {
+export default function LongButton({ text, ...rest }: KioskLongButtonProp): JSX.Element {
     // 버튼 눌렸는지 안눌렸는지 확인용 useState 선언
     const [pressed, setPressed] = useState(false);
 
@@ -71,7 +69,7 @@ export default function KioskLongButton({
     return (
         <button
             type="button"
-            className="kiosk-btn"
+            className={styles['kiosk-btn']}
             {...rest}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
@@ -80,9 +78,9 @@ export default function KioskLongButton({
             onTouchEnd={handleTouchEnd}
             style={getKioskButtonStyle({ pressed })}
         >
-            <div className="btn-text">{text}</div>
+            <div className={styles['btn-text']}>{text}</div>
             <img
-                className="btn-background-long"
+                className={styles['btn-background-long']}
                 alt="Btn background"
                 src={btnBackgroundLong}
             />

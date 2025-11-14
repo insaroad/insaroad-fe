@@ -1,0 +1,21 @@
+/* ======================= btn-backward ================== */
+.btn-backward {
+    aspect-ratio: 1;
+    height: 35px;
+    margin-left: 27px;
+    margin-top: 27px;
+    object-fit: cover;
+    width: 35px;
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+}
+
+.btn-backward:hover {
+    transform: scale(1.05);
+}
+/* active = 실제 클릭하는 순간 */
+.btn-backward:active {
+    transform: scale(0.92);
+    opacity: 0.8;
+}
