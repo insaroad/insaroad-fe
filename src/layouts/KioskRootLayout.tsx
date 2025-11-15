@@ -1,5 +1,6 @@
 /* [ KioskRootLayout.tsx ] */
 import { type JSX, useMemo } from 'react';
+import '@/styles/kiosk/style.css';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '@/components/kiosk/KioskRootLayout/Header';
 import Footer from '@/components/kiosk/KioskRootLayout/Footer';
