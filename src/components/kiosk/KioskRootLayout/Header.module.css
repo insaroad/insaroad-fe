@@ -1,6 +1,7 @@
 /* ======================= header ======================= */
 .header {
     display: flex;
+    position: relative;
     gap: 31px;
     flex: 0 0 12.85%; /* 상단 12.85% 차지 */
     width: 100%;
@@ -17,5 +18,5 @@
     letter-spacing: 2px;
     line-height: normal;
     margin-top: 35px;
-    width: 60%;
+    width: 100%;
 }

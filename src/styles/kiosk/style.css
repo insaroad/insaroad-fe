@@ -10,8 +10,8 @@
     vh는 브라우저 자체 높이를 기준으로 % 계산 */
     width: 100%;
 
-    height: 100vh; /* 내용 기준으로 크고 */
-    min-height: 100vh; /* 그래도 최소한 화면 한 장은 채워라 */
+    /* Fill the viewport so child flex percentages are calculated against it */
+    height: 100vh; /* 내용 기준이 아닌 뷰포트 기준으로 고정 */
     /* 좌우 마진 자동 설정하여 가로 가운데 정렬 */
     margin: 0 auto;
 }

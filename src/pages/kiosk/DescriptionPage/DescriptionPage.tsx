@@ -4,12 +4,12 @@ export default function DescriptionPage(): JSX.Element {
     return (
         <div className={styles['card-description']}>
             <div className={styles['card-background']} />
-            <p className={styles['card-text']}>Start your own tour in Insa-dong!</p>
-            <p className={styles['card-text']}>
+            <div className={styles['card-text1']}>Start your own tour in Insa-dong!</div>
+            <div className={styles['card-text2']}>
                 Visit a total of Three Locations,
                 <br />
                 And receive special rewards!!
-            </p>
+            </div>
         </div>
     );
 }
