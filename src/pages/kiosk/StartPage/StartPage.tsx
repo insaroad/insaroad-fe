@@ -1,25 +1,17 @@
-import { type JSX } from 'react';
+import React from 'react';
+import { InsaroadFootBackground } from '@/components/kiosk/background/InsaroadFootBackground';
 import styles from './StartPage.module.css';
-import imgInsaroad from '@/assets/img-insaroad.png';
-import LongButton from '@/components/kiosk/LongBotton/LongButton';
+import InsaroadTitle from '@/components/kiosk/insaroadTitle/InsaroadTitle';
 
-export default function StartPage(): JSX.Element {
+export const StartPage: React.FC = () => {
     return (
-        <div className={styles.kiosk}>
-            <div className={styles['section-main']}>
-                <div className={styles.title}>INSAROAD</div>
+        <div className={styles.container}>
+            <InsaroadFootBackground src="/src/assets/img-insaroad.png" />
 
-                <img
-                    className={styles['img-insaroad']}
-                    alt="Img insaroad"
-                    src={imgInsaroad}
-                />
-            </div>
-
-            <div className={styles['section-btns']}>
-                <LongButton text="Make Custom Route" />
-                <LongButton text="Follow Hot Course" />
-            </div>
+            {/* 이 아래의 컴포넌트들은 배경의 영향 없이 자유롭게 배치 */}
+            <InsaroadTitle text="INSAROAD" mode="center-both" />
         </div>
     );
-}
+};
+
+export default StartPage;
