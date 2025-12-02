@@ -1,9 +1,0 @@
-/* Body.module.css */
-.body {
-    flex: 1 1 auto; /* Header, Footer 제외한 나머지 높이 전부 차지 */
-    width: 100%;
-    display: flex;
-    position: relative; /* 혹시 absolute 자식 쓸 때 기준이 되도록 */
-    justify-content: center; /* 가로 가운데 */
-    align-items: center; /* 세로 가운데 */
-}

@@ -1,62 +1,16 @@
-/* 메인 섹션 */
-.section-main {
-    display: flex;
-    /* 자식 요소들 세로 방향으로 정렬 */
-    flex-direction: column;
-    /* 자식 요소들을 가로 방향으로 가운데 정렬 */
-    align-items: center;
-
-    flex: 1; /* 위/아래 섹션 비율 배분용 */
-    margin: 100px auto 0; /* ⬅️ 수평 가운데 정렬 */
+.container {
+    position: relative; /* 배경 absolute 기준 */
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    overflow: hidden; /* 혹시 밖으로 튀어 나가는 요소 방지 */
+}
+/* 타이틀 이동 이후 나타나는 요소 그룹 */
+.contentGroup {
+    opacity: 0;
+    transition: opacity 0.6s ease;
 }
 
-/* 타이틀 반응형 폰트로 설정 */
-.title {
-    color: #fe6c50;
-    font-family: 'Press Start 2P', Helvetica;
-    font-size: clamp(24px, 5vw, 40px);
-    font-weight: 400;
-    letter-spacing: 2px;
-    white-space: nowrap;
-}
-
-/* 메인 이미지 
-    - 이미지도 화면 폭에 따라 줄어들도록 설정
-*/
-.img-insaroad {
-    aspect-ratio: 1;
-    width: min(60vw, 305px); /* 화면 넓이 60% 또는 최대 305px */
-    height: auto;
-    object-fit: cover;
-}
-
-/* 버튼 섹션: 고정 width가 아니라 내부에서 정렬하도록 설정 
-    - section-btns 요소가 부모 요소인 .kiosk 안에서 너비 제한 없이 배치되고, 그 안에서 자식 요소들을 가운데 정렬한다는 의미
-*/
-.section-btns {
-    display: flex;
-    /* 메인 축을 어느 방향으로 만들건지 설정하는 속성 (column: 요소를 세로로 배치) */
-    flex-direction: column;
-    /* 교차 축(메인 축과 수직인 축)에서 정렬하는 방식 (여기서는 수평 가운데 정렬) 
-        - flex-start: 왼쪽 정렬
-        - center : 수평 가운데 정렬
-        - flex-end: 오른쪽 정렬
-    */
-    align-items: center;
-    /* 모든 자식 요소들 사이에 생기는 간격을 정의하는 속성 */
-    gap: 18px;
-    margin-top: 24px;
-}
-
-/* ===================== 반응형 ===================== */
-@media (max-width: 480px) {
-    .kiosk {
-        padding: 24px 16px;
-        gap: 24px;
-    }
-
-    .title {
-        font-size: clamp(20px, 6vw, 28px);
-        letter-spacing: 1px;
-    }
+.contentGroupVisible {
+    opacity: 1;
 }
