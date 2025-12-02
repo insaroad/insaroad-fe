@@ -1,0 +1,30 @@
+/* InsaroadButton.module.css */
+
+.button {
+    position: absolute;
+    border: none;
+    border-radius: 15px;
+    background-color: rgba(250, 163, 146, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+
+    box-shadow: none;
+    transform: translateY(0);
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* 눌린 상태(pressed) — JS로 class 추가 예정 */
+.pressed {
+    transform: translateY(3px);
+    background-color: rgba(250, 163, 146, 0.45);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
+}

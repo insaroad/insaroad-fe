@@ -1,0 +1,31 @@
+.string {
+    position: absolute;
+    left: 430px;
+    top: 200px;
+    pointer-events: none;
+
+    /* 커졌다 작았다 반복 */
+    animation: pulseScale 1.8s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+.question {
+    position: absolute;
+    right: 30px;
+    top: 210px;
+    pointer-events: none;
+    /* 살짝 다른 템포로 움직이게 해서 더 자연스럽게 */
+    animation: pulseScale 1.8s ease-in-out infinite;
+    transform-origin: center center;
+}
+@keyframes pulseScale {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.08); /* 살짝 커짐 */
+    }
+    100% {
+        transform: scale(1);
+    }
+}

@@ -5,3 +5,12 @@
     background-color: #fff;
     overflow: hidden; /* 혹시 밖으로 튀어 나가는 요소 방지 */
 }
+/* 타이틀 이동 이후 나타나는 요소 그룹 */
+.contentGroup {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.contentGroupVisible {
+    opacity: 1;
+}

@@ -1,0 +1,19 @@
+.subtitle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    color: #333;
+    margin: 0;
+    white-space: pre-line;
+}
