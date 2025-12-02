@@ -1,0 +1,54 @@
+.button {
+    position: absolute;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: #000;
+
+    cursor: pointer;
+
+    outline: none;
+    box-shadow: none;
+    border-radius: 16px;
+
+    /* Release(원래 상태로 돌아갈 때)는 부드럽고 느리게 */
+    transition:
+        background-color 0.35s ease,
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* 버튼 눌림 상태: 즉각적 반응 */
+.pressed {
+    background-color: rgba(0, 0, 0, 0.12);
+    transform: scale(0.93); /* 조금 더 눌리는 느낌 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+
+    /* 눌릴 때는 transition 없거나 매우 짧게 */
+    transition:
+        background-color 0.05s ease-out,
+        transform 0.05s ease-out,
+        box-shadow 0.05s ease-out;
+}
+
+/* outline 제거 */
+.button:focus,
+.button:focus-visible,
+.button:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
