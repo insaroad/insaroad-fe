@@ -1,5 +1,6 @@
 // pages/kiosk/StartPage.tsx
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { InsaroadFootBackground } from '@/components/kiosk/background/InsaroadFootBackground';
 import InsaroadTitle, {
     type PositionMode,
@@ -11,20 +12,20 @@ import QuestionDecor from '@/components/kiosk/decor/QuestionDecor';
 
 import styles from './StartPage.module.css';
 
-// 배경 발자국 이미지 (권장: import 방식)
 import insaroadBgImg from '@/assets/img-insaroad.png';
 
 export const StartPage: React.FC = () => {
     const [mode, setMode] = useState<PositionMode>('center-both');
     const [titleY, setTitleY] = useState<number | undefined>(undefined);
     const [contentVisible, setContentVisible] = useState(false);
+    const [isLeaving, setIsLeaving] = useState(false); // ✅ 페이드아웃 상태
+
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // 1단계: 0.5초 후 타이틀을 위로 200px 이동 + center-x 로 전환
         const moveTimer = setTimeout(() => {
             if (typeof window !== 'undefined') {
                 const centerY = window.innerHeight / 2;
-                // 중앙 기준 위로 150px
                 setTitleY(centerY - 150);
             } else {
                 setTitleY(200);
@@ -32,10 +33,9 @@ export const StartPage: React.FC = () => {
             setMode('center-x');
         }, 500);
 
-        // 2단계: 이동 애니메이션(0.4s) 후 컨텐츠 페이드인
         const contentTimer = setTimeout(() => {
             setContentVisible(true);
-        }, 500 + 400); // 0.5s + 0.4s
+        }, 500 + 400);
 
         return () => {
             clearTimeout(moveTimer);
@@ -43,29 +43,38 @@ export const StartPage: React.FC = () => {
         };
     }, []);
 
-    // 버튼 위치(예시): 중앙 기준으로 적당히 배치
     const buttonWidth = 350;
     const buttonHeight = 60;
     const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 375;
     const buttonX = centerX - buttonWidth / 2;
 
+    // ✅ "이벤트 이어서 진행하기" 버튼 클릭 시
+    const handleContinueClick = () => {
+        // 1) 먼저 현재 화면 페이드아웃
+        setIsLeaving(true);
+
+        // 2) 페이드아웃 트랜지션 시간 후 실제 라우팅
+        //    (CSS에서 transition: 0.4s 로 맞출 예정)
+        setTimeout(() => {
+            navigate('/kiosk/keep');
+        }, 400);
+    };
+
     return (
-        <div className={styles.container}>
+        <div
+            className={`${styles.container} ${isLeaving ? styles.containerLeaving : ''}`}
+        >
             <InsaroadFootBackground src={insaroadBgImg} />
 
-            {/* 타이틀: 처음 center-both → 이후 center-x + y - 200 */}
             <InsaroadTitle text="INSAROAD" mode={mode} y={titleY} />
 
-            {/* 타이틀 이동 이후 페이드인되는 영역 */}
             <div
                 className={`${styles.contentGroup} ${
                     contentVisible ? styles.contentGroupVisible : ''
                 }`}
             >
-                {/* 1. 안내 문구 (타이틀 아래) */}
                 {titleY !== undefined && <InsaroadSubtitle y={titleY + 60} />}
 
-                {/* 2. 버튼 두 개 */}
                 <InsaroadButton
                     width={buttonWidth}
                     height={buttonHeight}
@@ -73,15 +82,16 @@ export const StartPage: React.FC = () => {
                     y={(titleY ?? 200) + 200}
                     text="새로운 이벤트 참여하기"
                 />
+
                 <InsaroadButton
                     width={buttonWidth}
                     height={buttonHeight}
                     x={buttonX}
                     y={(titleY ?? 200) + 270}
                     text="이벤트 이어서 진행하기"
+                    onClick={handleContinueClick}
                 />
 
-                {/* 3. string / question 데코 이미지 */}
                 <StringDecor />
                 <QuestionDecor />
             </div>

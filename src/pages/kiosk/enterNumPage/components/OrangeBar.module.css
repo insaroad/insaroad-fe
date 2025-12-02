@@ -1,0 +1,29 @@
+.wrapper {
+    position: absolute;
+    /* 더 이상 flex 레이아웃 필요 없음 */
+}
+
+.bar {
+    width: 100%;
+    height: 4px;
+    background-color: #f28b6b; /* 주황색 */
+    border-radius: 999px;
+}
+
+/* 숫자 표시: 바의 위쪽에 떠 있도록 절대 위치 */
+.digit {
+    position: absolute;
+    left: 50%;
+    top: -38px; /* 바 위로 띄우는 정도, 필요하면 미세 조정 */
+    transform: translateX(-50%);
+
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+    color: #000;
+}

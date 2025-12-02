@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import StartPage from './pages/kiosk/StartPage/StartPage';
+import StartPage from './pages/kiosk/startPage/StartPage';
+import EnterNumPage from './pages/kiosk/enterNumPage/EnterNumPage';
 import './App.css';
 
 export function App() {
@@ -8,6 +9,7 @@ export function App() {
             <Routes>
                 <Route path="/kiosk">
                     <Route index element={<StartPage />} />
+                    <Route path="keep" element={<EnterNumPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -4,13 +4,22 @@
     height: 100vh;
     background-color: #fff;
     overflow: hidden; /* 혹시 밖으로 튀어 나가는 요소 방지 */
+    opacity: 1;
+    transition: opacity 0.15s ease-in-out;
 }
 /* 타이틀 이동 이후 나타나는 요소 그룹 */
 .contentGroup {
     opacity: 0;
-    transition: opacity 0.6s ease;
+    transform: translateY(10px);
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
 }
-
+/* 페이드아웃 상태 */
+.containerLeaving {
+    opacity: 0;
+}
 .contentGroupVisible {
     opacity: 1;
+    transform: translateY(0);
 }
