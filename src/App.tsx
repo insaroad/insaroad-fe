@@ -4,6 +4,7 @@ import EnterNumPage from './pages/kiosk/enterNumPage/EnterNumPage';
 import MissionDescriptionPageAnimal from './pages/kiosk/animalMissionPage/MissionDescriptionPageAnimal';
 import AnimalPage1 from './pages/kiosk/animalMissionPage/AnimalPage1';
 import AnimalPage2 from './pages/kiosk/animalMissionPage/AnimalPage2';
+import AnimalPage3 from './pages/kiosk/animalMissionPage/AnimalPage3';
 import './App.css';
 
 export function App() {
@@ -18,6 +19,7 @@ export function App() {
                             <Route index element={<MissionDescriptionPageAnimal />} />
                             <Route path="page1" element={<AnimalPage1 />} />
                             <Route path="page2" element={<AnimalPage2 />} />
+                            <Route path="page3" element={<AnimalPage3 />} />
                         </Route>
                     </Route>
                 </Route>

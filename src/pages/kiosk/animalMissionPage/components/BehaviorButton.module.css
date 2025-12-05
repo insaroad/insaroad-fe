@@ -1,5 +1,5 @@
 .button {
-    position: inherit;
+    position: relative;
     border: none;
     border-radius: 15px;
     background-color: rgba(250, 163, 146, 0.3);

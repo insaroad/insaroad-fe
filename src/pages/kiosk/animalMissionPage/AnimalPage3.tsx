@@ -7,13 +7,13 @@ import insaroadBgImg from '@/assets/img-insaroad.png';
 import { InsaroadFootBackground } from '@/components/kiosk/background/InsaroadFootBackground';
 import { NextButton } from '@/components/kiosk/button/NextButton';
 
-import pattern1 from './assets/pattern1.png';
-import pattern2 from './assets/pattern2.png';
-import pattern3 from './assets/pattern3.png';
-import pattern4 from './assets/pattern4.png';
-import pattern5 from './assets/pattern5.png';
+import painting1 from './assets/painting1.png';
+import painting2 from './assets/painting2.png';
+import painting3 from './assets/painting3.png';
+import painting4 from './assets/painting4.png';
+import painting5 from './assets/painting5.png';
 
-export const AnimalPage1: React.FC = () => {
+export const AnimalPage3: React.FC = () => {
     const [selectedCount, setSelectedCount] = useState(0);
 
     return (
@@ -21,23 +21,23 @@ export const AnimalPage1: React.FC = () => {
             <KioskHeader />
             <InsaroadFootBackground src={insaroadBgImg} />
 
-            <QuestionTitle text="1. 다음 중 가장 마음이 끌리는 전통 문양을 2개 골라주세요." />
+            <QuestionTitle text="3. 다음 중 가장 마음에 드는 민화는 무엇인가요?" />
 
             <ChoiceGrid
                 items={[
-                    { index: 1, imageSrc: pattern1 },
-                    { index: 2, imageSrc: pattern2 },
-                    { index: 3, imageSrc: pattern3 },
-                    { index: 4, imageSrc: pattern4 },
-                    { index: 5, imageSrc: pattern5 },
+                    { index: 1, imageSrc: painting1 },
+                    { index: 2, imageSrc: painting2 },
+                    { index: 3, imageSrc: painting3 },
+                    { index: 4, imageSrc: painting4 },
+                    { index: 5, imageSrc: painting5 },
                 ]}
-                imageWidth={300}
-                imageHeight={300}
+                imageWidth={350}
+                imageHeight={350}
                 onSelectionChange={(selected) => setSelectedCount(selected.length)}
             />
-            {selectedCount === 2 && (
+            {selectedCount === 1 && (
                 <NextButton
-                    to="/kiosk/missions/animal/page2"
+                    to="/kiosk/missions/animal/result"
                     width={320}
                     height={100}
                     positionMode="center-x"
@@ -48,4 +48,4 @@ export const AnimalPage1: React.FC = () => {
     );
 };
 
-export default AnimalPage1;
+export default AnimalPage3;
