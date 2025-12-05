@@ -18,7 +18,7 @@ export const InsaroadTitle: React.FC<InsaroadTitleProps> = ({
     x = 0,
     y = 0,
     fontSize = 40,
-    color = '#D4634A',
+    color = '#FE6C50',
     mode = 'manual',
 }) => {
     // 기본 클래스 + 페이드인 클래스
