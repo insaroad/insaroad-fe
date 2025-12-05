@@ -9,7 +9,7 @@ export const KioskHeader: React.FC = () => {
     return (
         <header className={styles.header}>
             {/* 좌측 상단 INSAROAD 타이틀 (살짝 작은 크기) */}
-            <InsaroadTitle text="INSAROAD" mode="manual" x={18} y={18} fontSize={20} />
+            <InsaroadTitle text="INSAROAD" mode="manual" x={70} y={100} fontSize={50} />
 
             {/* 우측 상단 홈 버튼 */}
             <HomeButton onClick={() => navigate('/kiosk')} />

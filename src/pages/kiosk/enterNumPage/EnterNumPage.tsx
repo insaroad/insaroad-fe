@@ -10,8 +10,8 @@ import insaroadBgImg from '@/assets/img-insaroad.png';
 export const EnterNumPage: React.FC = () => {
     const [code, setCode] = useState<string>(''); // 최대 3자리 숫자 입력
 
-    const orangeY = 280; // 주황 바 y 위치 기준
-    const orangeWidth = 40; // 주황 바 너비
+    const orangeY = 700; // 주황 바 y 위치 기준
+    const orangeWidth = 100; // 주황 바 너비
 
     const handleNumberClick = (digit: number) => {
         setCode((prev) => {
@@ -31,13 +31,13 @@ export const EnterNumPage: React.FC = () => {
 
             {/* 아래 Body 레이어는 이후에 구성 */}
             {/* 1. 안내 문구: y만 조절 */}
-            <QrGuideText y={180} />
+            <QrGuideText y={400} />
 
             {/* 2. 주황 바 3개 */}
             {/* 왼쪽 */}
             <OrangeBar
                 width={orangeWidth}
-                x={140}
+                x={350}
                 y={orangeY}
                 mode="manual"
                 digit={code[0] ?? ''}
@@ -52,7 +52,7 @@ export const EnterNumPage: React.FC = () => {
             {/* 오른쪽 */}
             <OrangeBar
                 width={orangeWidth}
-                x={390}
+                x={1000}
                 y={orangeY}
                 mode="manual"
                 digit={code[2] ?? ''}
@@ -60,12 +60,12 @@ export const EnterNumPage: React.FC = () => {
 
             {/* 키패드*/}
             <Keypad
-                originX={168}
-                originY={250}
-                buttonWidth={60}
-                buttonHeight={60}
-                gapX={90}
-                gapY={80}
+                originX={355}
+                originY={600}
+                buttonWidth={150}
+                buttonHeight={150}
+                gapX={300}
+                gapY={200}
                 onNumberClick={handleNumberClick}
                 onBackspaceClick={handleBackspace}
             />

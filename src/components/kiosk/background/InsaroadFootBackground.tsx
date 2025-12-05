@@ -16,7 +16,7 @@ export const InsaroadFootBackground: React.FC<InsaroadFootBackgroundProps> = ({
                 src={src}
                 x={0.3621}
                 y={0.0571}
-                size={0.3276}
+                size={0.32}
                 angle={30}
                 opacity={0.3}
             />
@@ -26,7 +26,7 @@ export const InsaroadFootBackground: React.FC<InsaroadFootBackgroundProps> = ({
                 src={src}
                 x={0.6034}
                 y={0.3714}
-                size={0.2759}
+                size={0.27}
                 angle={30}
                 opacity={0.3}
             />
@@ -36,7 +36,7 @@ export const InsaroadFootBackground: React.FC<InsaroadFootBackgroundProps> = ({
                 src={src}
                 x={0.2241}
                 y={0.5286}
-                size={0.1897}
+                size={0.19}
                 angle={25}
                 opacity={0.3}
             />
@@ -46,7 +46,7 @@ export const InsaroadFootBackground: React.FC<InsaroadFootBackgroundProps> = ({
                 src={src}
                 x={0.2586}
                 y={0.8143}
-                size={0.1724}
+                size={0.16}
                 angle={25}
                 opacity={0.3}
             />
