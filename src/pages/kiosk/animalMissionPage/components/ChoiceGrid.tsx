@@ -9,6 +9,11 @@ interface ChoiceGridProps {
 
     imageWidth?: number;
     imageHeight?: number;
+    maxSelectable?: number;
+
+    width?: string | number;
+    columnGap?: number;
+    rowGap?: number;
 }
 
 export const ChoiceGrid: React.FC<ChoiceGridProps> = ({
@@ -16,6 +21,11 @@ export const ChoiceGrid: React.FC<ChoiceGridProps> = ({
     onSelectionChange,
     imageWidth,
     imageHeight,
+    maxSelectable = 2,
+
+    width = '80%',
+    columnGap = 250,
+    rowGap = 120,
 }) => {
     const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
 
@@ -24,11 +34,9 @@ export const ChoiceGrid: React.FC<ChoiceGridProps> = ({
         let nextSelected: number[];
 
         if (isSelected) {
-            // 이미 선택된 항목 → 해제
             nextSelected = selectedIndexes.filter((i) => i !== index);
         } else {
-            // 새로 선택인데 이미 2개 선택됨 → 무시
-            if (selectedIndexes.length >= 2) {
+            if (selectedIndexes.length >= maxSelectable) {
                 return;
             }
             nextSelected = [...selectedIndexes, index];
@@ -39,7 +47,14 @@ export const ChoiceGrid: React.FC<ChoiceGridProps> = ({
     };
 
     return (
-        <div className={styles.grid}>
+        <div
+            className={styles.grid}
+            style={{
+                width,
+                columnGap,
+                rowGap,
+            }}
+        >
             {items.map((item) => (
                 <ChoiceItem
                     key={item.index}

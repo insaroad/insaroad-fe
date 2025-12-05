@@ -1,4 +1,4 @@
-// pages/kiosk/TraditionalPatternQuestionPage.tsx
+// pages/kiosk/TraditionalPatternQuestionPage.tsx (AnimalPage3)
 import React, { useState } from 'react';
 import { KioskHeader } from '@/components/kiosk/header/KioskHeader';
 import QuestionTitle from './components/QuestionTitle';
@@ -21,7 +21,10 @@ export const AnimalPage3: React.FC = () => {
             <KioskHeader />
             <InsaroadFootBackground src={insaroadBgImg} />
 
-            <QuestionTitle text="3. 다음 중 가장 마음에 드는 민화는 무엇인가요?" />
+            <QuestionTitle
+                text="3. 다음 중 가장 마음에 드는 민화는 무엇인가요?"
+                marginBottom={60}
+            />
 
             <ChoiceGrid
                 items={[
@@ -31,17 +34,20 @@ export const AnimalPage3: React.FC = () => {
                     { index: 4, imageSrc: painting4 },
                     { index: 5, imageSrc: painting5 },
                 ]}
-                imageWidth={350}
-                imageHeight={350}
+                imageWidth={400}
+                imageHeight={400}
+                maxSelectable={1}
+                columnGap={100}
                 onSelectionChange={(selected) => setSelectedCount(selected.length)}
             />
+
             {selectedCount === 1 && (
                 <NextButton
                     to="/kiosk/missions/animal/result"
                     width={320}
                     height={100}
                     positionMode="center-x"
-                    y={1800} // 화면에서 원하는 Y 위치(px)
+                    y={1850}
                 />
             )}
         </div>
