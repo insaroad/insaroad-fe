@@ -2,8 +2,8 @@
 
 .homeButton {
     position: absolute;
-    top: 12px;
-    right: 24px;
+    top: 70px;
+    right: 70px;
 
     display: flex;
     flex-direction: column;
@@ -24,8 +24,8 @@
 
 /* 아이콘 */
 .icon {
-    width: 32px;
-    height: 32px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
 }
 
@@ -37,7 +37,7 @@
         BlinkMacSystemFont,
         system-ui,
         sans-serif;
-    font-size: 12px;
+    font-size: 30px;
     font-weight: 400;
     color: #000;
 }

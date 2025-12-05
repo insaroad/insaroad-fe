@@ -2,7 +2,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 500px;
+    width: 1500px;
     font-family:
         'Pretendard',
         -apple-system,
@@ -10,7 +10,7 @@
         system-ui,
         sans-serif;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 35px;
     line-height: 1.4;
     text-align: center;
     color: #333;

@@ -3,14 +3,14 @@
     left: 50%;
     transform: translateX(-50%);
     margin: 0;
-    width: 400px;
+    width: 1000px;
     font-family:
         'Pretendard',
         -apple-system,
         BlinkMacSystemFont,
         system-ui,
         sans-serif;
-    font-size: 20px;
+    font-size: 50px;
     font-weight: 650;
     color: #000;
     text-align: center;

@@ -14,7 +14,7 @@
 .digit {
     position: absolute;
     left: 50%;
-    top: -38px; /* 바 위로 띄우는 정도, 필요하면 미세 조정 */
+    top: -90px; /* 바 위로 띄우는 정도, 필요하면 미세 조정 */
     transform: translateX(-50%);
 
     font-family:
@@ -24,6 +24,6 @@
         system-ui,
         sans-serif;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 60px;
     color: #000;
 }

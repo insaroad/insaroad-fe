@@ -15,7 +15,7 @@ export const BackgroundFoot: React.FC<BackgroundFootProps> = ({
     opacity = 1,
     x,
     y,
-    size = 140,
+    size = 0.2,
 }) => {
     return (
         <img
@@ -23,12 +23,13 @@ export const BackgroundFoot: React.FC<BackgroundFootProps> = ({
             alt="foot"
             style={{
                 position: 'absolute',
-                left: x,
-                top: y,
-                width: size,
-                height: size,
+                left: `${x * 100}%`,
+                top: `${y * 100}%`,
+                width: `${size * 100}%`, // 컨테이너 기준 비율로 크기 조정
+                height: 'auto',
                 opacity,
                 transform: `rotate(${angle}deg)`,
+                transformOrigin: 'center center',
                 pointerEvents: 'none',
             }}
         />
