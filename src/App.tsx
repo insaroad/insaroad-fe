@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import StartPage from './pages/kiosk/startPage/StartPage';
 import EnterNumPage from './pages/kiosk/enterNumPage/EnterNumPage';
-import MissionDescriptionPageAnimal from './pages/kiosk/missionDescriptionPageAnimal/MissionDescriptionPageAnimal';
+import MissionDescriptionPageAnimal from './pages/kiosk/animalMissionPage/MissionDescriptionPageAnimal';
+import AnimalPage1 from './pages/kiosk/animalMissionPage/AnimalPage1';
 import './App.css';
 
 export function App() {
@@ -11,8 +12,11 @@ export function App() {
                 <Route path="/kiosk">
                     <Route index element={<StartPage />} />
                     <Route path="keep" element={<EnterNumPage />} />
-                    <Route path="mission">
-                        <Route path="animal" element={<MissionDescriptionPageAnimal />} />
+                    <Route path="missions">
+                        <Route path="animal">
+                            <Route index element={<MissionDescriptionPageAnimal />} />
+                            <Route path="page1" element={<AnimalPage1 />} />
+                        </Route>
                     </Route>
                 </Route>
             </Routes>

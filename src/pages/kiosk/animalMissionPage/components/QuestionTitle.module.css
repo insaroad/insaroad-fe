@@ -1,0 +1,14 @@
+.title {
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+    font-weight: 700;
+    font-size: 53px;
+    text-align: center;
+    margin-top: 250px; /* Header 아래 여백 */
+    margin-bottom: 200px;
+    color: #000;
+}
