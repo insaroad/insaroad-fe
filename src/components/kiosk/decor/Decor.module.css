@@ -1,8 +1,8 @@
 .string {
     position: absolute;
-    right: 50px;
+    right: 150px;
     top: 500px;
-    width: 300px;
+    width: 350px;
     height: auto;
     pointer-events: none;
 
@@ -13,9 +13,9 @@
 
 .question {
     position: absolute;
-    width: 60px;
+    width: 70px;
     height: auto; /* 비율 유지 */
-    right: 70px;
+    right: 150px;
     top: 500px;
     pointer-events: none;
     /* 살짝 다른 템포로 움직이게 해서 더 자연스럽게 */

@@ -26,7 +26,7 @@ export const StartPage: React.FC = () => {
         const moveTimer = setTimeout(() => {
             if (typeof window !== 'undefined') {
                 const centerY = window.innerHeight / 2;
-                setTitleY(centerY - 400);
+                setTitleY(centerY - 500);
             } else {
                 setTitleY(700);
             }
@@ -66,20 +66,20 @@ export const StartPage: React.FC = () => {
         >
             <InsaroadFootBackground src={insaroadBgImg} />
 
-            <InsaroadTitle text="INSAROAD" mode={mode} y={titleY} fontSize={90} />
+            <InsaroadTitle text="INSAROAD" mode={mode} y={titleY} fontSize={100} />
 
             <div
                 className={`${styles.contentGroup} ${
                     contentVisible ? styles.contentGroupVisible : ''
                 }`}
             >
-                {titleY !== undefined && <InsaroadSubtitle y={titleY + 100} />}
+                {titleY !== undefined && <InsaroadSubtitle y={titleY + 130} />}
 
                 <InsaroadButton
                     width={buttonWidth}
                     height={buttonHeight}
                     x={buttonX}
-                    y={(titleY ?? 1000) + 500}
+                    y={(titleY ?? 1000) + 600}
                     text="새로운 이벤트 참여하기"
                 />
 
@@ -87,7 +87,7 @@ export const StartPage: React.FC = () => {
                     width={buttonWidth}
                     height={buttonHeight}
                     x={buttonX}
-                    y={(titleY ?? 200) + 700}
+                    y={(titleY ?? 200) + 800}
                     text="이벤트 이어서 진행하기"
                     onClick={handleContinueClick}
                 />
