@@ -6,9 +6,17 @@ import styles from './ChoiceGrid.module.css';
 interface ChoiceGridProps {
     items: { index: number; imageSrc: string }[];
     onSelectionChange?: (selectedIndexes: number[]) => void;
+
+    imageWidth?: number;
+    imageHeight?: number;
 }
 
-export const ChoiceGrid: React.FC<ChoiceGridProps> = ({ items, onSelectionChange }) => {
+export const ChoiceGrid: React.FC<ChoiceGridProps> = ({
+    items,
+    onSelectionChange,
+    imageWidth,
+    imageHeight,
+}) => {
     const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
 
     const handleToggle = (index: number) => {
@@ -39,6 +47,8 @@ export const ChoiceGrid: React.FC<ChoiceGridProps> = ({ items, onSelectionChange
                     imageSrc={item.imageSrc}
                     selected={selectedIndexes.includes(item.index)}
                     onToggle={handleToggle}
+                    imageWidth={imageWidth}
+                    imageHeight={imageHeight}
                 />
             ))}
         </div>
