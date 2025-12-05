@@ -26,9 +26,9 @@ export const StartPage: React.FC = () => {
         const moveTimer = setTimeout(() => {
             if (typeof window !== 'undefined') {
                 const centerY = window.innerHeight / 2;
-                setTitleY(centerY - 150);
+                setTitleY(centerY - 500);
             } else {
-                setTitleY(200);
+                setTitleY(700);
             }
             setMode('center-x');
         }, 500);
@@ -43,9 +43,9 @@ export const StartPage: React.FC = () => {
         };
     }, []);
 
-    const buttonWidth = 350;
-    const buttonHeight = 60;
-    const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 375;
+    const buttonWidth = 1000;
+    const buttonHeight = 190;
+    const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 910;
     const buttonX = centerX - buttonWidth / 2;
 
     // ✅ "이벤트 이어서 진행하기" 버튼 클릭 시
@@ -66,20 +66,20 @@ export const StartPage: React.FC = () => {
         >
             <InsaroadFootBackground src={insaroadBgImg} />
 
-            <InsaroadTitle text="INSAROAD" mode={mode} y={titleY} />
+            <InsaroadTitle text="INSAROAD" mode={mode} y={titleY} fontSize={120} />
 
             <div
                 className={`${styles.contentGroup} ${
                     contentVisible ? styles.contentGroupVisible : ''
                 }`}
             >
-                {titleY !== undefined && <InsaroadSubtitle y={titleY + 60} />}
+                {titleY !== undefined && <InsaroadSubtitle y={titleY + 180} />}
 
                 <InsaroadButton
                     width={buttonWidth}
                     height={buttonHeight}
                     x={buttonX}
-                    y={(titleY ?? 200) + 200}
+                    y={(titleY ?? 1000) + 600}
                     text="새로운 이벤트 참여하기"
                 />
 
@@ -87,7 +87,7 @@ export const StartPage: React.FC = () => {
                     width={buttonWidth}
                     height={buttonHeight}
                     x={buttonX}
-                    y={(titleY ?? 200) + 270}
+                    y={(titleY ?? 200) + 840}
                     text="이벤트 이어서 진행하기"
                     onClick={handleContinueClick}
                 />
