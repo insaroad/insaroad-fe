@@ -14,8 +14,8 @@ export const InsaroadFootBackground: React.FC<InsaroadFootBackgroundProps> = ({
             {/* 위쪽 큰 발자국 */}
             <BackgroundFoot
                 src={src}
-                x={0.3621}
-                y={0.0571}
+                x={0.2921}
+                y={0.0471}
                 size={0.32}
                 angle={30}
                 opacity={0.3}
@@ -24,7 +24,7 @@ export const InsaroadFootBackground: React.FC<InsaroadFootBackgroundProps> = ({
             {/* 가운데 오른쪽 발자국 */}
             <BackgroundFoot
                 src={src}
-                x={0.6034}
+                x={0.6334}
                 y={0.3714}
                 size={0.27}
                 angle={30}
@@ -34,7 +34,7 @@ export const InsaroadFootBackground: React.FC<InsaroadFootBackgroundProps> = ({
             {/* 가운데 왼쪽 작은 발자국 */}
             <BackgroundFoot
                 src={src}
-                x={0.2241}
+                x={0.1841}
                 y={0.5286}
                 size={0.19}
                 angle={25}
@@ -44,7 +44,7 @@ export const InsaroadFootBackground: React.FC<InsaroadFootBackgroundProps> = ({
             {/* 아래쪽 작은 발자국 */}
             <BackgroundFoot
                 src={src}
-                x={0.2586}
+                x={0.3086}
                 y={0.8143}
                 size={0.16}
                 angle={25}
