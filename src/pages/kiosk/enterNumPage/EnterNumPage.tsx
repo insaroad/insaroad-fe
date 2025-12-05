@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { InsaroadFootBackground } from '@/components/kiosk/background/InsaroadFootBackground';
-import KioskHeader from '@/layouts/KioskHeader';
+import KioskHeader from '@/components/kiosk/header/KioskHeader';
 import { QrGuideText } from './components/QrGuideText';
 import { OrangeBar } from './components/OrangeBar';
 import Keypad from '@/components/kiosk/keypad/Keypad';
