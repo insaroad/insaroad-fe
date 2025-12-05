@@ -1,0 +1,51 @@
+.button {
+    position: inherit;
+    border: none;
+    border-radius: 15px;
+    background-color: rgba(250, 163, 146, 0.3);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    /* 🔥 width/height 자동 조절 */
+    padding: 30px 42px; /* 내용 기반 여백만 지정 */
+    width: fit-content;
+    height: fit-content;
+
+    cursor: pointer;
+
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+    color: #000;
+
+    box-shadow: none;
+    transform: translateY(0);
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* 아이콘 */
+.icon {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    margin-right: 18px;
+}
+
+/* 텍스트 */
+.text {
+    display: inline-block;
+    line-height: 1.25;
+}
+
+/* 눌림 효과 */
+.pressed {
+    transform: translateY(3px);
+    background-color: rgba(250, 163, 146, 0.45);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
+}
