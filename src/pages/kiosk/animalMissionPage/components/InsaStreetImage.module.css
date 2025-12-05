@@ -4,5 +4,5 @@
     margin: 10px auto 100px;
     object-fit: contain;
     z-index: 10;
-    position: inherit;
+    position: relative;
 }

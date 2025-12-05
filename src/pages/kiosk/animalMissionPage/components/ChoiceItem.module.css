@@ -19,8 +19,6 @@
 /* 이미지 */
 .imageWrapper {
     position: relative;
-    width: 280px;
-    height: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,7 +45,6 @@
 
 /* 밑줄 */
 .underline {
-    width: 280px;
     height: 2px;
     background-color: black;
     margin-top: 16px;

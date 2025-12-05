@@ -6,8 +6,11 @@ interface ChoiceItemProps {
     index: number; // 1~5
     imageSrc: string;
     imageAlt?: string;
-    selected: boolean; // 부모가 넘겨주는 선택 상태
-    onToggle: (index: number) => void; // 선택 요청 이벤트
+    selected: boolean;
+    onToggle: (index: number) => void;
+
+    imageWidth?: number;
+    imageHeight?: number;
 }
 
 const CIRCLED_NUMBERS = ['①', '②', '③', '④', '⑤'];
@@ -18,6 +21,8 @@ export const ChoiceItem: React.FC<ChoiceItemProps> = ({
     imageAlt = 'choice image',
     selected,
     onToggle,
+    imageWidth = 280, // 기본값
+    imageHeight = 280, // 기본값
 }) => {
     const circledNumber = CIRCLED_NUMBERS[index - 1] ?? String(index);
 
@@ -29,7 +34,10 @@ export const ChoiceItem: React.FC<ChoiceItemProps> = ({
         >
             <div className={styles.index}>{circledNumber}</div>
 
-            <div className={styles.imageWrapper}>
+            <div
+                className={styles.imageWrapper}
+                style={{ width: imageWidth, height: imageHeight }} // 동적 크기 적용
+            >
                 <img
                     src={imageSrc}
                     alt={imageAlt}
@@ -38,7 +46,10 @@ export const ChoiceItem: React.FC<ChoiceItemProps> = ({
                 {selected && <div className={styles.check} />}
             </div>
 
-            <div className={styles.underline} />
+            <div
+                className={styles.underline}
+                style={{ width: imageWidth }} // 밑줄도 이미지 크기에 맞게
+            />
         </button>
     );
 };
