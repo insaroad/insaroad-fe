@@ -33,6 +33,7 @@ export const AnimalPage1: React.FC = () => {
                 ]}
                 imageWidth={300}
                 imageHeight={300}
+                maxSelectable={2}
                 onSelectionChange={(selected) => setSelectedCount(selected.length)}
             />
             {selectedCount === 2 && (

@@ -1,10 +1,11 @@
 .grid {
-    width: 80%; /* 🔥 전체 페이지 대비 80% 너비 */
-    margin: 0 auto; /* 🔥 grid 자체를 중앙으로 배치 */
+    width: 80%;
+    margin: 0 auto;
 
     display: grid;
     grid-template-columns: repeat(3, auto);
-    justify-content: center; /* grid 안의 item들을 가로 중앙으로 정렬 */
+    justify-content: center;
+
     column-gap: 250px;
     row-gap: 120px;
 }
