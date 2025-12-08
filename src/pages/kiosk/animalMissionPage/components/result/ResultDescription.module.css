@@ -1,0 +1,22 @@
+.wrapper {
+    width: 60%;
+    margin: 0 auto 0px;
+}
+
+.paragraph {
+    font-size: 30px;
+    line-height: 1.7;
+    color: #111;
+
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+    white-space: pre-line;
+}
+
+.bold {
+    font-weight: 700;
+}
