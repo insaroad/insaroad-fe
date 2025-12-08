@@ -1,0 +1,60 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 450px;
+}
+
+/* 베이스 아이콘: 연한 회색 */
+.imageBase {
+    width: 400px;
+    height: auto;
+    opacity: 0.2;
+    filter: grayscale(1);
+}
+
+/* 위에서 덮는 “색칠되는” 레이어 */
+.imageFill {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+
+    /* 붓 아이콘 모양대로 잘라내기 */
+    -webkit-mask-image: url('@/assets/kiosk/icon-brush.png');
+    mask-image: url('@/assets/kiosk/icon-brush.png');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+
+    /* 실제로 보이는 색(검정) + 대각선 그라디언트 */
+    background-image: linear-gradient(
+        135deg,
+        #000000 0%,
+        #000000 50%,
+        transparent 50%,
+        transparent 100%
+    );
+    background-size: 250% 250%;
+    background-position: 0% 0%;
+
+    /* 스피너 느낌 애니메이션 */
+    animation: brushFill 2.3s linear infinite;
+}
+
+/* 왼쪽 위 -> 오른쪽 아래로 색이 지나가면서 채워졌다가 다시 비워지는 느낌 */
+@keyframes brushFill {
+    0% {
+        background-position: 100% 100%;
+        opacity: 0.2;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        background-position: 0% 0%;
+        opacity: 1;
+    }
+}

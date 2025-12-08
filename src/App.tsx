@@ -11,6 +11,7 @@ import './App.css';
 import MissionDescriptionPageKorean from './pages/kiosk/koreanNamePage/MissionDescriptionPageKorean';
 import KoreanNamePage1 from './pages/kiosk/koreanNamePage/KoreanNamePage1';
 import KoreanNamePage2 from './pages/kiosk/koreanNamePage/KoreanNamePage2';
+import KoreanNamePage3 from './pages/kiosk/koreanNamePage/KoreanNamePage3';
 
 export function App() {
     return (
@@ -31,6 +32,7 @@ export function App() {
                             <Route index element={<MissionDescriptionPageKorean />} />
                             <Route path="page1" element={<KoreanNamePage1 />} />
                             <Route path="page2" element={<KoreanNamePage2 />} />
+                            <Route path="page3" element={<KoreanNamePage3 />} />
                         </Route>
                     </Route>
                 </Route>
