@@ -4,15 +4,15 @@ import { MissionDescriptionPage } from '@/components/kiosk/missionDescriptionPag
 import insaroadBgImg from '@/assets/img-insaroad.png';
 import { InsaroadFootBackground } from '@/components/kiosk/background/InsaroadFootBackground';
 
-export const MissionDescriptionPageAnimal: React.FC = () => {
+export const MissionDescriptionPageKorean: React.FC = () => {
     return (
         <div className="kiosk-page">
             <KioskHeader />
             <InsaroadFootBackground src={insaroadBgImg} />
             <MissionDescriptionPage
-                mainTitle="나와 어울리는 민화 속 동물은?"
+                mainTitle="한글 이름 짓기"
                 subTitle={
-                    '내가 민화에 들어갔다면 어떤 동물이었을까요?\n간단한 테스트를 통해 알아보세요!'
+                    '본인의 생일과 성별을 입력하고 나만의 한글 이름을 만들어보세요!'
                 }
                 position="center-both"
             />
@@ -20,4 +20,4 @@ export const MissionDescriptionPageAnimal: React.FC = () => {
     );
 };
 
-export default MissionDescriptionPageAnimal;
+export default MissionDescriptionPageKorean;
