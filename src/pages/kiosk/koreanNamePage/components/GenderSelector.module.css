@@ -1,0 +1,51 @@
+/* src/components/kiosk/gender/GenderSelector.module.css */
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+}
+
+.divider {
+    font-size: 70px;
+    line-height: 3;
+    color: #f39b7b; /* 기존 날짜 구분선과 비슷한 살구색 */
+}
+
+.option {
+    border: none;
+    background: transparent;
+    font-size: 70px;
+    cursor: pointer;
+    padding: 0 8px;
+    outline: none;
+    box-shadow: none;
+
+    /* 🔥 색상 전환 부드럽게 */
+    transition:
+        color 0.3s ease,
+        font-weight 0.3s ease;
+}
+.option:focus,
+.option:focus-visible,
+.option:active {
+    outline: none;
+    box-shadow: none;
+}
+
+.active {
+    font-weight: 700;
+    color: #000000;
+}
+
+.inactive {
+    font-weight: 400;
+    color: #b8b2b2; /* 회색 */
+}
