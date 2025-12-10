@@ -14,6 +14,8 @@ import KoreanNamePage2 from './pages/kiosk/koreanNamePage/KoreanNamePage2';
 import KoreanNamePage3 from './pages/kiosk/koreanNamePage/KoreanNamePage3';
 import KoreanNameResultPage from './pages/kiosk/koreanNamePage/KoreanNameResultPage';
 
+import MissionDescriptionPageSignboard from './pages/kiosk/signboardPage/MissionDescriptionPageSignboard';
+
 export function App() {
     return (
         <BrowserRouter>
@@ -35,6 +37,9 @@ export function App() {
                             <Route path="page2" element={<KoreanNamePage2 />} />
                             <Route path="page3" element={<KoreanNamePage3 />} />
                             <Route path="result" element={<KoreanNameResultPage />} />
+                        </Route>
+                        <Route path="signboard">
+                            <Route index element={<MissionDescriptionPageSignboard />} />
                         </Route>
                     </Route>
                 </Route>
