@@ -7,8 +7,8 @@
     /* 눌렀을 때 작은 인터랙션 */
 }
 .button:active {
-    transform: scale(0.9); /* 눌았을 때 좀 더 확실한 느낌 */
-    filter: brightness(0.8); /* 버튼이 어두워지면서 눌림 표현 */
+    transform: scale(0.6); /* 눌았을 때 좀 더 확실한 느낌 */
+    filter: brightness(0.7); /* 버튼이 어두워지면서 눌림 표현 */
 }
 .button:hover {
     transform: scale(1.03);

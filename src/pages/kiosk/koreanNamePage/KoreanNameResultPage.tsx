@@ -15,7 +15,7 @@ export const KoreanNameResultPage: React.FC = () => {
 
     const [remainingSeconds, setRemainingSeconds] = useState<number>(60);
     // 테스트용 버튼 표시 트리거
-    const showExtraButton = remainingSeconds <= 40;
+    const showExtraButton = remainingSeconds <= 50;
     // TODO: 실제 백엔드에서 내려오는 값으로 대체
     const englishTitle = 'Your Korean Name is...';
     const koreanTitle = '당신의 이름은...';
@@ -55,11 +55,11 @@ export const KoreanNameResultPage: React.FC = () => {
 
             {/* 좌상단 카운트다운 숫자 */}
             <div className={styles.countdown}>{remainingSeconds}</div>
-            {/* 40초 이하에서만 버튼 등장 */}
+            {/* 50초 이하에서만 버튼 등장 */}
             {showExtraButton && (
                 <div className={styles.extraButtonArea}>
-                    {/* 40초 이하에서 나타나는 next.png 버튼 */}
-                    {remainingSeconds <= 40 && (
+                    {/* 50초 이하에서 나타나는 next.png 버튼 */}
+                    {remainingSeconds <= 50 && (
                         <ImageButton
                             src={nextButtonImg}
                             width={100}
