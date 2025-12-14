@@ -21,17 +21,23 @@ import SignBoardPage2 from './pages/kiosk/signboardPage/SignBoardPage2';
 import StringPage1 from './pages/kiosk/stringPage/StringPage1';
 import StringPage2 from './pages/kiosk/stringPage/StringPage2';
 import StringPage3 from './pages/kiosk/stringPage/StringPage3';
+import KioskLayout from '@/layouts/KioskLayout';
+import WebLayout from '@/layouts/WebLayout';
 
 import { QrGuidePage } from './pages/kiosk/qrPage/QrGuidePage';
 import { QrEndPage } from './pages/kiosk/qrPage/QrEndPage';
+
+import { NextPlacePage } from './pages/web/nextPlace/NextPlacePage';
 
 export function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/kiosk">
+                {/* kiosk */}
+                <Route path="/kiosk" element={<KioskLayout />}>
                     <Route index element={<StartPage />} />
                     <Route path="keep" element={<EnterNumPage />} />
+
                     <Route path="missions">
                         <Route path="animal">
                             <Route index element={<MissionDescriptionPageAnimal />} />
@@ -40,6 +46,7 @@ export function App() {
                             <Route path="page3" element={<AnimalPage3 />} />
                             <Route path="result" element={<AnimalResultPage />} />
                         </Route>
+
                         <Route path="korean-name">
                             <Route index element={<MissionDescriptionPageKorean />} />
                             <Route path="page1" element={<KoreanNamePage1 />} />
@@ -47,25 +54,32 @@ export function App() {
                             <Route path="page3" element={<KoreanNamePage3 />} />
                             <Route path="result" element={<KoreanNameResultPage />} />
                         </Route>
+
                         <Route path="signboard">
                             <Route index element={<MissionDescriptionPageSignboard />} />
                             <Route path="page1" element={<SignBoardPage1 />} />
                             <Route path="page2" element={<SignBoardPage2 />} />
                         </Route>
                     </Route>
+
                     <Route path="string">
                         <Route path="1" element={<StringPage1 />} />
                         <Route path="2" element={<StringPage2 />} />
                         <Route path="3" element={<StringPage3 />} />
                     </Route>
+
                     <Route path="qr">
                         <Route index element={<QrGuidePage />} />
                         <Route path="end" element={<QrEndPage />} />
                     </Route>
                 </Route>
+
+                {/* web */}
+                <Route path="/web" element={<WebLayout />}>
+                    <Route path="nextPlace" element={<NextPlacePage />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     );
 }
-
 export default App;

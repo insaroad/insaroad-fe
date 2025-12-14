@@ -1,0 +1,20 @@
+.title {
+    /* Pro Max에서 아래가 남는 문제 보정: top/bottom 여백을 “큰 화면에서만” 조금 더 */
+    margin: clamp(1.2rem, 5.6vh, 2.8rem) 0 clamp(0.8rem, 2.6vh, 1.7rem) 0.2rem;
+
+    font-family:
+        'GalmuriMono11',
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        'Apple SD Gothic Neo',
+        'Noto Sans KR',
+        sans-serif;
+
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.25;
+    word-break: keep-all;
+}

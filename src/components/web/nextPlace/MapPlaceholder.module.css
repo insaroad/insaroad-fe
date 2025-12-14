@@ -1,0 +1,33 @@
+.wrap {
+    width: 100%;
+    max-width: 100%;
+
+    /* ⭐ 핵심 */
+    border-radius: 1rem;
+    overflow: hidden;
+
+    /* 시각 보정 */
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* 실제 지도 영역 */
+.map {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+
+    /* radius는 제거 */
+    border-radius: 0;
+
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    /* iOS Safari 안정성 */
+    transform: translateZ(0);
+}
+
+.caption {
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    text-align: center;
+}
