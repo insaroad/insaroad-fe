@@ -1,0 +1,23 @@
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.backgroundLayer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.center {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

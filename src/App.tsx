@@ -18,6 +18,13 @@ import MissionDescriptionPageSignboard from './pages/kiosk/signboardPage/Mission
 import SignBoardPage1 from './pages/kiosk/signboardPage/SignBoardPage1';
 import SignBoardPage2 from './pages/kiosk/signboardPage/SignBoardPage2';
 
+import StringPage1 from './pages/kiosk/stringPage/StringPage1';
+import StringPage2 from './pages/kiosk/stringPage/StringPage2';
+import StringPage3 from './pages/kiosk/stringPage/StringPage3';
+
+import { QrGuidePage } from './pages/kiosk/qrPage/QrGuidePage';
+import { QrEndPage } from './pages/kiosk/qrPage/QrEndPage';
+
 export function App() {
     return (
         <BrowserRouter>
@@ -45,6 +52,15 @@ export function App() {
                             <Route path="page1" element={<SignBoardPage1 />} />
                             <Route path="page2" element={<SignBoardPage2 />} />
                         </Route>
+                    </Route>
+                    <Route path="string">
+                        <Route path="1" element={<StringPage1 />} />
+                        <Route path="2" element={<StringPage2 />} />
+                        <Route path="3" element={<StringPage3 />} />
+                    </Route>
+                    <Route path="qr">
+                        <Route index element={<QrGuidePage />} />
+                        <Route path="end" element={<QrEndPage />} />
                     </Route>
                 </Route>
             </Routes>

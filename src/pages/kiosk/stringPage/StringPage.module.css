@@ -1,0 +1,89 @@
+.root {
+    position: relative;
+    display: inline-block;
+    transform: translateZ(0);
+}
+
+.layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+/* 기본 표시 상태 */
+.hidden {
+    opacity: 0;
+}
+
+.visible {
+    opacity: 1;
+}
+
+/* (2) 1_1.png: 1.5초 동안 페이드인 */
+.fadeIn {
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* (3) 1_2로 바뀌는 즉시: 팝(강조) */
+.pop {
+    animation: popScale 600ms ease-out both;
+}
+
+@keyframes popScale {
+    0% {
+        transform: scale(1.4);
+    }
+    35% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 접근성: 모션 최소화 */
+@media (prefers-reduced-motion: reduce) {
+    .fadeIn {
+        animation-duration: 1ms !important;
+    }
+    .pop {
+        animation: none !important;
+        transform: scale(1) !important;
+    }
+}
+.root {
+    position: relative;
+    display: inline-block;
+    transform: translateZ(0);
+
+    /* ✅ 페이드아웃 준비 */
+    opacity: 1;
+    transition: opacity var(--fadeOutMs, 350ms) ease-in-out;
+}
+
+/* ✅ done 이후 화면 사라짐 */
+.leaving {
+    opacity: 0;
+}
