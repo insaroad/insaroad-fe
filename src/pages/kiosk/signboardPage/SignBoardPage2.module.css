@@ -26,8 +26,8 @@
         system-ui,
         sans-serif;
     position: absolute;
-    top: 0px; /* 기존 값 유지 */
-    left: 400px;
+    top: 250px; /* 기존 값 유지 */
+    right: 100px;
     z-index: 2;
 
     font-size: 40px;
@@ -115,4 +115,23 @@
     position: absolute;
     inset: 0;
     z-index: 5;
+
+    /* ImageButton 클릭 가능하게 하려면 이 패턴 권장 */
+    pointer-events: none;
+}
+
+/* ✅ 실제 버튼만 클릭 허용 */
+.extraButton {
+    pointer-events: auto;
+
+    opacity: 0;
+    transform: translateY(8px);
+    animation: extraFadeIn 280ms ease-out forwards;
+}
+
+@keyframes extraFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

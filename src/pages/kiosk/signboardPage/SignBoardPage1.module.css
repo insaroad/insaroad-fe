@@ -10,6 +10,11 @@
     opacity: 1;
     transition: opacity 350ms ease-in-out; /* ✅ 부드러운 전환 */
 }
+/* ✅ 진입 페이드인 */
+.enter {
+    opacity: 0;
+    animation: pageFadeIn 350ms ease-out forwards;
+}
 .leaving {
     opacity: 0; /* ✅ 화면 전체 페이드아웃 */
 }
@@ -56,8 +61,8 @@
 /* 좌상단 카운트다운 숫자 */
 .countdown {
     position: absolute;
-    top: 0px; /* 기존 값 유지 */
-    left: 400px;
+    top: 250px; /* 기존 값 유지 */
+    right: 100px;
     z-index: 2;
 
     font-size: 40px;
@@ -113,7 +118,11 @@
         transform: scale(1);
     }
 }
-
+@keyframes pageFadeIn {
+    to {
+        opacity: 1;
+    }
+}
 @keyframes feedbackFadeOut {
     from {
         opacity: 1;

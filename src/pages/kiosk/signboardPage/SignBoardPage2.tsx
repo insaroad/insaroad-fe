@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignBoardPage2.module.css';
 
@@ -18,42 +18,81 @@ export const SignBoardPage2: React.FC = () => {
     const [remainingSeconds, setRemainingSeconds] = useState<number>(60);
     const showExtraButton = remainingSeconds <= 50;
 
+    // ✅ 페이드 전환 상태
+    const [entered, setEntered] = useState(false);
+    const [isLeaving, setIsLeaving] = useState(false);
+    const navRef = useRef<number | null>(null);
+
+    // ✅ 진입 페이드인 트리거
+    useEffect(() => {
+        // 다음 프레임에 enter 붙여서 자연스럽게
+        const raf = requestAnimationFrame(() => setEntered(true));
+        return () => cancelAnimationFrame(raf);
+    }, []);
+
+    const fadeOutAndNavigate = useCallback(
+        (to: string) => {
+            if (isLeaving) return;
+            setIsLeaving(true);
+
+            // CSS transition 시간과 동일하게
+            navRef.current = window.setTimeout(() => {
+                navigate(to);
+            }, 350);
+        },
+        [isLeaving, navigate]
+    );
+
+    useEffect(() => {
+        return () => {
+            if (navRef.current) window.clearTimeout(navRef.current);
+        };
+    }, []);
+
     const handleExpire = useCallback(() => {
-        navigate('/kiosk');
-    }, [navigate]);
+        fadeOutAndNavigate('/kiosk');
+    }, [fadeOutAndNavigate]);
 
     const handleNext = useCallback(() => {
-        navigate('/kiosk/signboard/3'); // 실제 라우트로 변경
-    }, [navigate]);
+        fadeOutAndNavigate('/kiosk/string/3'); // 실제 라우트로 변경
+    }, [fadeOutAndNavigate]);
 
     return (
-        <main className={styles.container}>
+        <main
+            className={[
+                styles.container,
+                entered ? styles.enter : '',
+                isLeaving ? styles.leaving : '',
+            ].join(' ')}
+        >
             <KioskHeader />
 
             <div className={styles.backgroundLayer}>
                 <InsaroadFootBackground src={insaroadBgImg} />
             </div>
-
+            <CountDown
+                className={styles.countdown}
+                initialSeconds={60}
+                onExpire={handleExpire}
+                onTick={setRemainingSeconds}
+            />
             <div className={styles.stage}>
-                <CountDown
-                    className={styles.countdown}
-                    initialSeconds={60}
-                    onExpire={handleExpire}
-                    onTick={setRemainingSeconds} // ✅ 매초 남은 시간 업데이트
-                />
-
                 {/* ✅ 50초 이하에서만 오른쪽 next.png 버튼 */}
                 {showExtraButton && (
                     <div className={styles.extraButtonArea}>
-                        <ImageButton
-                            src={nextButtonImg}
-                            width={100}
-                            height={100}
-                            x={1600}
-                            y={550}
-                            alt="다음 버튼"
-                            onClick={handleNext}
-                        />
+                        <div className={styles.extraButton}>
+                            {' '}
+                            {/* ✅ 페이드인 애니메이션 적용 */}
+                            <ImageButton
+                                src={nextButtonImg}
+                                width={100}
+                                height={100}
+                                x={1600}
+                                y={550}
+                                alt="다음 버튼"
+                                onClick={handleNext}
+                            />
+                        </div>
                     </div>
                 )}
 
