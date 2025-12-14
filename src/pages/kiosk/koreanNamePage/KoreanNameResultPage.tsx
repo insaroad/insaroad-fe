@@ -55,15 +55,17 @@ export const KoreanNameResultPage: React.FC = () => {
             {/* ✅ 50초 이하에서 next 버튼 */}
             {showExtraButton && (
                 <div className={styles.extraButtonArea}>
-                    <ImageButton
-                        src={nextButtonImg}
-                        width={100}
-                        height={100}
-                        x={1600}
-                        y={1050}
-                        alt="다음 버튼"
-                        onClick={() => navigate('/kiosk/next')}
-                    />
+                    <div className={styles.extraButton}>
+                        <ImageButton
+                            src={nextButtonImg}
+                            width={100}
+                            height={100}
+                            x={1600}
+                            y={1050}
+                            alt="다음 버튼"
+                            onClick={() => navigate('/kiosk/string/2')}
+                        />
+                    </div>
                 </div>
             )}
 

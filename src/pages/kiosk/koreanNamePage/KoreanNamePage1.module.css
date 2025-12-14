@@ -14,13 +14,15 @@
         BlinkMacSystemFont,
         system-ui,
         sans-serif;
+    opacity: 1;
+    transition: opacity var(--fadeMs, 350ms) ease-in-out;
 }
 
 /* 좌상단 카운트다운 숫자 */
 .countdown {
     position: absolute;
-    top: 400px; /* 헤더 아래 여백에 맞게 조정 */
-    left: 400px;
+    top: 250px; /* 헤더 아래 여백에 맞게 조정 */
+    right: 100px;
     font-size: 40px;
     font-weight: 500;
     color: #000000;
@@ -52,4 +54,18 @@
     color: #f39b7b; /* 디자인에 맞게 살구색 계열 */
     line-height: 3;
     transform: translateY(-6px);
+}
+
+.enter {
+    opacity: 0;
+    animation: pageFadeIn var(--fadeMs, 350ms) ease-out forwards;
+}
+@keyframes pageFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.leaving {
+    opacity: 0;
 }

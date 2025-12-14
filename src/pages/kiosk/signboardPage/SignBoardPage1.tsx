@@ -6,7 +6,6 @@ import { KioskHeader } from '@/components/kiosk/header/KioskHeader';
 import { InsaroadButton } from '@/components/kiosk/button/InsaroadButton';
 
 import signboardImg from './assets/signboard.png';
-
 import { InsaroadFootBackground } from '@/components/kiosk/background/InsaroadFootBackground';
 import insaroadBgImg from '@/assets/img-insaroad.png';
 
@@ -25,6 +24,9 @@ export const SignBoardPage1: React.FC = () => {
     const [feedback, setFeedback] = useState<Feedback | null>(null);
     const [fadeOut, setFadeOut] = useState<boolean>(false);
 
+    // ✅ 진입 페이드인 트리거
+    const [entered, setEntered] = useState(false);
+
     // ✅ 페이지 전환용(페이드아웃)
     const [isLeaving, setIsLeaving] = useState<boolean>(false);
 
@@ -33,6 +35,12 @@ export const SignBoardPage1: React.FC = () => {
     const navRef = useRef<number | null>(null);
 
     const isFeedbackOpen = feedback !== null;
+
+    // ✅ mount 직후 enter 실행
+    useEffect(() => {
+        const t = window.setTimeout(() => setEntered(true), 0);
+        return () => window.clearTimeout(t);
+    }, []);
 
     const handleChoice = (choiceNumber: number) => {
         if (isFeedbackOpen) return;
@@ -43,18 +51,14 @@ export const SignBoardPage1: React.FC = () => {
         setFeedback(nextFeedback);
         setFadeOut(false);
 
-        // 체크 이미지 fade-out 시작
         fadeRef.current = window.setTimeout(() => {
             setFadeOut(true);
         }, 750);
 
-        // ✅ 1초 후 처리
         timeoutRef.current = window.setTimeout(() => {
             if (nextFeedback === 'correct') {
-                // ✅ 여기서 "페이지 페이드아웃" 시작
                 setIsLeaving(true);
 
-                // transition 시간(아래 CSS의 350ms) 이후 navigate
                 navRef.current = window.setTimeout(() => {
                     navigate('/kiosk/missions/signboard/page2');
                 }, 350);
@@ -74,20 +78,24 @@ export const SignBoardPage1: React.FC = () => {
     }, []);
 
     return (
-        <main className={`${styles.container} ${isLeaving ? styles.leaving : ''}`}>
+        <main
+            className={[
+                styles.container,
+                entered ? styles.enter : '',
+                isLeaving ? styles.leaving : '',
+            ].join(' ')}
+        >
             <KioskHeader />
 
             <div className={styles.backgroundLayer}>
                 <InsaroadFootBackground src={insaroadBgImg} />
             </div>
-
+            <CountDown
+                className={styles.countdown}
+                initialSeconds={60}
+                onExpire={() => navigate('/kiosk')}
+            />
             <div className={`${styles.stage} ${isFeedbackOpen ? styles.dimmed : ''}`}>
-                <CountDown
-                    className={styles.countdown}
-                    initialSeconds={60}
-                    onExpire={() => navigate('/kiosk')}
-                />
-
                 <h1 className={styles.title}>한글 간판 맞추기</h1>
 
                 <div className={styles.imageWrapper}>

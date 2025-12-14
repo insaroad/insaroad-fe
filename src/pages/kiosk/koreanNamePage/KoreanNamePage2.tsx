@@ -1,5 +1,4 @@
-// src/pages/kiosk/GenderPage.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InsaroadButton } from '@/components/kiosk/button/InsaroadButton';
 import { TitleSection } from './components/TitleSection';
@@ -10,51 +9,53 @@ import { KioskHeader } from '@/components/kiosk/header/KioskHeader';
 import { InsaroadFootBackground } from '@/components/kiosk/background/InsaroadFootBackground';
 import insaroadBgImg from '@/assets/img-insaroad.png';
 
-const COUNTDOWN_ENABLED = false; // 필요 시 true로 변경하면 동작
+import CountDown from '@/components/kiosk/countDown/CountDown';
+import useRouteFadeNavigate from '@/hooks/kiosk/useRouteFadeNavigate';
 
-export const GenderPage: React.FC = () => {
+export const KoreanNamePage2: React.FC = () => {
     const navigate = useNavigate();
-    const [gender, setGender] = useState<Gender>('male'); // 기본값: 남자
-    const [remainingSeconds, setRemainingSeconds] = useState<number>(60);
+    const [gender, setGender] = useState<Gender>('male');
+    const [entered, setEntered] = useState(false);
 
-    // 카운트다운
-    useEffect(() => {
-        const timerId = window.setInterval(() => {
-            setRemainingSeconds((prev) => {
-                if (prev <= 1) {
-                    window.clearInterval(timerId);
-                    // 0초가 되면 홈 화면으로 이동 (Home 버튼과 동일 동작)
-                    navigate('/kiosk'); // 필요 시 경로 수정
-                    return 0;
-                }
-                return prev - 1;
-            });
-        }, 1000);
+    const { isLeaving, fadeNavigate, durationMs } = useRouteFadeNavigate({
+        durationMs: 350,
+    });
 
-        return () => {
-            window.clearInterval(timerId);
-        };
-    }, [navigate]);
+    useEffect(() => setEntered(true), []);
 
-    const handleConfirm = () => {
+    const handleExpire = useCallback(() => {
+        fadeNavigate('/kiosk');
+    }, [fadeNavigate]);
+
+    const handleConfirm = useCallback(() => {
         console.log('Selected gender:', gender);
-        navigate('/kiosk/result'); // 실제 다음 페이지 라우트에 맞게 수정
-    };
+        fadeNavigate('/kiosk/missions/korean-name/page3'); // TODO: 실제 라우트로 맞추세요
+    }, [fadeNavigate, gender]);
 
     return (
-        <main className={styles.container}>
+        <main
+            className={[
+                styles.container,
+                entered ? styles.enter : '',
+                isLeaving ? styles.leaving : '',
+            ].join(' ')}
+            style={{ ['--fadeMs' as any]: `${durationMs}ms` }}
+        >
             <KioskHeader />
-            {/* 배경 레이어 */}
+
             <div className={styles.backgroundLayer}>
                 <InsaroadFootBackground src={insaroadBgImg} />
             </div>
-            {/* 1. 좌상단 카운트다운 숫자 */}
-            <div className={styles.countdown}>{remainingSeconds}</div>
 
-            {/* 상단 공통 타이틀 (한글 이름 짓기) */}
+            {/* ✅ CountDown 교체 */}
+            <CountDown
+                className={styles.countdown}
+                initialSeconds={60}
+                onExpire={handleExpire}
+            />
+
             <TitleSection />
 
-            {/* 2. 질문 텍스트 + 성별 선택 */}
             <section className={styles.questionSection} aria-label="성별 선택">
                 <p className={styles.questionText}>당신의 성별은 무엇인가요?</p>
 
@@ -75,4 +76,4 @@ export const GenderPage: React.FC = () => {
     );
 };
 
-export default GenderPage;
+export default KoreanNamePage2;

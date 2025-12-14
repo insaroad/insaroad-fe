@@ -1,0 +1,25 @@
+/* MissionDescriptionPageSignboard.module.css */
+.page {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    opacity: 1;
+    transition: opacity 350ms ease-in-out;
+}
+
+.enter {
+    opacity: 0;
+    animation: pageFadeIn 350ms ease-out forwards;
+}
+
+@keyframes pageFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.leaving {
+    opacity: 0;
+}

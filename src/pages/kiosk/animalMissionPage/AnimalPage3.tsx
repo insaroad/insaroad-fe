@@ -1,11 +1,19 @@
-// pages/kiosk/TraditionalPatternQuestionPage.tsx (AnimalPage3)
+// AnimalPage3.tsx
 import React, { useState } from 'react';
+import styles from './AnimalPage3.module.css';
+import { useNavigate } from 'react-router-dom';
+
 import { KioskHeader } from '@/components/kiosk/header/KioskHeader';
 import QuestionTitle from './components/QuestionTitle';
 import ChoiceGrid from './components/ChoiceGrid';
+
 import insaroadBgImg from '@/assets/img-insaroad.png';
 import { InsaroadFootBackground } from '@/components/kiosk/background/InsaroadFootBackground';
+
 import { NextButton } from '@/components/kiosk/button/NextButton';
+import useRouteFadeNavigate from '@/hooks/kiosk/useRouteFadeNavigate';
+
+import CountDown from '@/components/kiosk/countDown/CountDown';
 
 import painting1 from './assets/painting1.png';
 import painting2 from './assets/painting2.png';
@@ -14,12 +22,30 @@ import painting4 from './assets/painting4.png';
 import painting5 from './assets/painting5.png';
 
 export const AnimalPage3: React.FC = () => {
+    const navigate = useNavigate();
     const [selectedCount, setSelectedCount] = useState(0);
 
+    const { isLeaving, fadeNavigate, durationMs } = useRouteFadeNavigate({
+        durationMs: 350, // ✅ 통일
+    });
+
     return (
-        <div className="kiosk-page" style={{ position: 'relative', height: '100vh' }}>
+        <div
+            className={`${styles.page} ${styles.enter} ${isLeaving ? styles.leaving : ''}`}
+            style={{ ['--fadeMs' as any]: `${durationMs}ms` }}
+        >
             <KioskHeader />
-            <InsaroadFootBackground src={insaroadBgImg} />
+
+            <div className={styles.backgroundLayer}>
+                <InsaroadFootBackground src={insaroadBgImg} />
+            </div>
+
+            {/* ✅ CountDown만 (50초 버튼 없음) */}
+            <CountDown
+                className={styles.countdown}
+                initialSeconds={60}
+                onExpire={() => navigate('/kiosk')}
+            />
 
             <QuestionTitle
                 text="3. 다음 중 가장 마음에 드는 민화는 무엇인가요?"
@@ -48,6 +74,7 @@ export const AnimalPage3: React.FC = () => {
                     height={100}
                     positionMode="center-x"
                     y={1850}
+                    onBeforeNavigate={(to) => fadeNavigate(to)}
                 />
             )}
         </div>

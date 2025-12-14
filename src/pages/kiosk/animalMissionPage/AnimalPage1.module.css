@@ -1,8 +1,11 @@
-.page {
+.container {
     position: relative;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     overflow: hidden;
+
+    opacity: 1;
+    transition: opacity var(--fadeMs, 350ms) ease-in-out;
 }
 
 .backgroundLayer {
@@ -12,12 +15,6 @@
     pointer-events: none;
 }
 
-.contentLayer {
-    position: relative;
-    z-index: 1;
-}
-
-/* ✅ CountDown 위치 */
 .countdown {
     font-family:
         'Pretendard',
@@ -35,10 +32,10 @@
     color: #000;
 }
 
-/* ✅ 진입 페이드인(원하면 유지) */
+/* ✅ 페이지 진입 페이드인 */
 .enter {
     opacity: 0;
-    animation: pageFadeIn 350ms ease-out forwards;
+    animation: pageFadeIn var(--fadeMs, 500ms) ease-out forwards;
 }
 
 @keyframes pageFadeIn {
@@ -47,22 +44,7 @@
     }
 }
 
-/* ✅ 50초 이하 버튼 영역 + 페이드인 */
-.extraButtonArea {
-    position: absolute;
-    inset: 0;
-    z-index: 30;
-    pointer-events: none;
-}
-
-.extraButton {
-    pointer-events: auto;
+/* ✅ 페이지 이탈 페이드아웃 */
+.leaving {
     opacity: 0;
-    animation: fadeIn 250ms ease-out forwards;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
 }

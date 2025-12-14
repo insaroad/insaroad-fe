@@ -6,33 +6,45 @@
     height: 100%;
     text-align: center;
     pointer-events: none;
+
+    opacity: 1;
+    transition: opacity var(--fadeMs, 350ms) ease-in-out;
+}
+
+/* ✅ 진입 페이드인 (선택) */
+.enter {
+    opacity: 0;
+    animation: pageFadeIn var(--fadeMs, 350ms) ease-out forwards;
+}
+
+@keyframes pageFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ✅ 이탈 페이드아웃 */
+.leaving {
+    opacity: 0;
 }
 
 /* ==========================
-   PositionMode: manual
+   PositionMode
 ========================== */
 .position-manual {
-    /* 개발자가 직접 margin/padding/absolute 등으로 배치 */
 }
 
-/* ==========================
-   PositionMode: center-x
-========================== */
 .position-center-x {
     display: flex;
     flex-direction: column;
-    align-items: center; /* X축 중앙 */
-    /* Y는 움직이지 않음 (개발자 배치 유지) */
+    align-items: center;
 }
 
-/* ==========================
-   PositionMode: center-both
-========================== */
 .position-center-both {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Y축 중앙 */
-    align-items: center; /* X축 중앙 */
+    justify-content: center;
+    align-items: center;
     height: 100%;
 }
 
@@ -61,4 +73,14 @@
         BlinkMacSystemFont,
         system-ui,
         sans-serif;
+}
+
+/* 접근성: 모션 최소화 */
+@media (prefers-reduced-motion: reduce) {
+    .enter {
+        animation-duration: 1ms !important;
+    }
+    .wrapper {
+        transition-duration: 1ms !important;
+    }
 }
