@@ -1,0 +1,13 @@
+.figure {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    width: 100%;
+    max-width: 520px; /* 화면에 맞춰 조절 */
+    height: auto;
+    display: block;
+    border-radius: 0; /* 필요 시 변경 */
+}

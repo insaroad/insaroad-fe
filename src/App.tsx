@@ -16,6 +16,7 @@ import KoreanNameResultPage from './pages/kiosk/koreanNamePage/KoreanNameResultP
 
 import MissionDescriptionPageSignboard from './pages/kiosk/signboardPage/MissionDescriptionPageSignboard';
 import SignBoardPage1 from './pages/kiosk/signboardPage/SignBoardPage1';
+import SignBoardPage2 from './pages/kiosk/signboardPage/SignBoardPage2';
 
 export function App() {
     return (
@@ -42,6 +43,7 @@ export function App() {
                         <Route path="signboard">
                             <Route index element={<MissionDescriptionPageSignboard />} />
                             <Route path="page1" element={<SignBoardPage1 />} />
+                            <Route path="page2" element={<SignBoardPage2 />} />
                         </Route>
                     </Route>
                 </Route>
