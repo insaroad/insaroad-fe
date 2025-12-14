@@ -28,6 +28,7 @@ import { QrGuidePage } from './pages/kiosk/qrPage/QrGuidePage';
 import { QrEndPage } from './pages/kiosk/qrPage/QrEndPage';
 
 import { NextPlacePage } from './pages/web/nextPlace/NextPlacePage';
+import TicketPage from './pages/web/ticket/TicketPage';
 
 export function App() {
     return (
@@ -77,6 +78,7 @@ export function App() {
                 {/* web */}
                 <Route path="/web" element={<WebLayout />}>
                     <Route path="nextPlace" element={<NextPlacePage />} />
+                    <Route path="ticket" element={<TicketPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

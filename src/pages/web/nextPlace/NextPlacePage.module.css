@@ -1,9 +1,12 @@
 .page {
     position: relative;
-    min-height: 100dvh;
+    height: 100dvh; /* ✅ 내부 스크롤 컨테이너로 고정 */
     width: 100%;
-    overflow-x: hidden; /* 가로 튐 방지 */
-    overflow-y: hidden; /* 기존 의도 유지라면 그대로, 필요시 제거 */
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch; /* ✅ iOS */
+    overscroll-behavior: contain; /* ✅ 상위 영향 차단 */
 }
 
 .container {
