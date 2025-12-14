@@ -1,0 +1,118 @@
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.backgroundLayer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* 좌상단 카운트다운 숫자 */
+.countdown {
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+    position: absolute;
+    top: 0px; /* 기존 값 유지 */
+    left: 400px;
+    z-index: 2;
+
+    font-size: 40px;
+    font-weight: 500;
+    color: #000;
+}
+
+.title {
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+    position: relative;
+    z-index: 2;
+
+    margin-top: 250px;
+    text-align: center;
+    font-size: 70px;
+    font-weight: 700;
+    opacity: 0.5;
+}
+
+.imageWrapper {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.exampleImage {
+    width: 800px; /* 필요시 조정 */
+    height: auto;
+    display: block;
+}
+
+.textSection {
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+    position: absolute;
+    top: 800px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+
+    width: 100%;
+    max-width: 1500px;
+    padding: 0 24px;
+
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.paragraph {
+    margin: 0;
+    font-size: 40px;
+    line-height: 1.8;
+    font-weight: 500;
+}
+
+.emphasis {
+    font-weight: 800;
+}
+
+.paragraphStrong {
+    margin-top: 10px;
+    font-size: 50px;
+    line-height: 1.8;
+    font-weight: 900;
+}
+
+.extraButtonArea {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+}

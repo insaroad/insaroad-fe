@@ -14,6 +14,10 @@ import KoreanNamePage2 from './pages/kiosk/koreanNamePage/KoreanNamePage2';
 import KoreanNamePage3 from './pages/kiosk/koreanNamePage/KoreanNamePage3';
 import KoreanNameResultPage from './pages/kiosk/koreanNamePage/KoreanNameResultPage';
 
+import MissionDescriptionPageSignboard from './pages/kiosk/signboardPage/MissionDescriptionPageSignboard';
+import SignBoardPage1 from './pages/kiosk/signboardPage/SignBoardPage1';
+import SignBoardPage2 from './pages/kiosk/signboardPage/SignBoardPage2';
+
 export function App() {
     return (
         <BrowserRouter>
@@ -35,6 +39,11 @@ export function App() {
                             <Route path="page2" element={<KoreanNamePage2 />} />
                             <Route path="page3" element={<KoreanNamePage3 />} />
                             <Route path="result" element={<KoreanNameResultPage />} />
+                        </Route>
+                        <Route path="signboard">
+                            <Route index element={<MissionDescriptionPageSignboard />} />
+                            <Route path="page1" element={<SignBoardPage1 />} />
+                            <Route path="page2" element={<SignBoardPage2 />} />
                         </Route>
                     </Route>
                 </Route>

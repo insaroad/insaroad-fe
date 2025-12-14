@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     /* 헤더는 별도 컴포넌트(KioskHeader)에서 관리한다고 가정 */
-    background-color: #fffaf7; /* 전체 톤에 맞게 조정 */
+    background-color: #ffffff; /* 전체 톤에 맞게 조정 */
     font-family:
         'Pretendard',
         -apple-system,
