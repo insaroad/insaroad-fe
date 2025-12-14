@@ -15,6 +15,9 @@ export const MissionDescriptionPageKorean: React.FC = () => {
                     '본인의 생일과 성별을 입력하고 나만의 한글 이름을 만들어보세요!'
                 }
                 position="center-both"
+                nextTo="/kiosk/missions/korean-name/page1" // ✅ 5초 후 페이드아웃 → page1 이동
+                autoNextMs={5000} // ✅ 기본이 5000이라 생략 가능
+                fadeMs={350} // ✅ 기본이 350이라 생략 가능
             />
         </div>
     );

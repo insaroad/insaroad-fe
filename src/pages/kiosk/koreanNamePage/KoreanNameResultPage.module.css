@@ -17,10 +17,11 @@
 /* 좌상단 카운트다운 숫자 */
 .countdown {
     position: absolute;
-    top: 400px;
-    left: 400px;
+    top: 250px;
+    right: 100px;
     font-size: 40px;
     font-weight: 500;
+    z-index: 20;
     color: #000000;
 }
 
@@ -98,4 +99,23 @@
     line-height: 1.6;
     margin-bottom: 12px;
     width: 1000px;
+}
+/* ✅ 50초 이하 버튼 영역 + 페이드인 */
+.extraButtonArea {
+    position: absolute;
+    inset: 0;
+    z-index: 30; /* ✅ countdown보다 위로 */
+    pointer-events: none; /* ✅ overlay는 클릭 막고 */
+}
+
+.extraButton {
+    pointer-events: auto; /* ✅ 버튼만 클릭 가능 */
+    opacity: 0;
+    animation: fadeIn 250ms ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }
