@@ -1,0 +1,31 @@
+.header {
+    position: relative; /* absolute 기준 고정 */
+    width: 100%;
+    padding-top: 0.25rem;
+    padding-left: 1.25rem; /* 좌측 여백 */
+    padding-right: 1.25rem;
+}
+
+.brand {
+    position: absolute;
+    top: 0rem; /* rem 기반 */
+    left: 0rem; /* rem 기반 */
+
+    font-family: 'Press Start 2P', sans-serif;
+    letter-spacing: 2px;
+    color: #fe6c50;
+
+    margin: 0;
+    padding: 0;
+
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+
+    /* 폰트: 모바일 폭에 맞춰 자연스럽게 */
+    font-size: clamp(1rem, 2.8vw, 1.25rem);
+
+    transition:
+        top 0.8s ease,
+        transform 0.8s ease;
+}

@@ -1,0 +1,52 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: transparent; /* 배경은 dimmed로 처리 */
+}
+
+.image {
+    max-width: 90vw;
+    max-height: 70vh;
+
+    border-radius: 1rem;
+    object-fit: contain;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* 닫기 버튼 */
+.close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    border: none;
+    border-radius: 999px;
+    padding: 0;
+
+    background: rgba(0, 0, 0, 0.129);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close img {
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.close:focus-visible {
+    outline: 0.2rem solid rgba(255, 122, 47, 0.6);
+    outline-offset: 0.2rem;
+}
