@@ -22,8 +22,8 @@
 /* ✅ 우상단 카운트다운 */
 .countdown {
     position: absolute;
-    top: 700px;
-    right: 300px;
+    top: 250px;
+    right: 100px;
     z-index: 5;
 
     font-size: 36px;

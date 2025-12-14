@@ -7,31 +7,6 @@
     opacity: 1;
     transition: opacity var(--fadeMs, 350ms) ease-in-out;
 }
-
-/* ✅ 배경 고정 레이어 */
-.backgroundLayer {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* 기존 레이아웃 유지 */
-.buttonContainer {
-    width: 70%;
-    margin: 0 auto;
-    margin-top: 20px;
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px 60px;
-
-    justify-items: center;
-
-    position: relative;
-    z-index: 2; /* ✅ 배경 위로 */
-}
-
 .countdown {
     font-family:
         'Pretendard',
@@ -48,8 +23,13 @@
     font-weight: 500;
     color: #000;
 }
+.backgroundLayer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
 
-/* ✅ 진입 페이드인 */
 .enter {
     opacity: 0;
     animation: pageFadeIn var(--fadeMs, 500ms) ease-out forwards;
@@ -61,7 +41,6 @@
     }
 }
 
-/* ✅ 이탈 페이드아웃 */
 .leaving {
     opacity: 0;
 }

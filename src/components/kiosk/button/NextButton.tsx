@@ -1,8 +1,6 @@
-// components/kiosk/common/NextButton.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './NextButton.module.css';
-
 import nextButtonImage from '@/assets/next.png';
 
 export type PositionMode = 'manual' | 'center-x' | 'center-both';
@@ -14,6 +12,12 @@ export interface NextButtonProps {
     x?: number;
     y?: number;
     positionMode?: PositionMode;
+
+    /** ✅ 페이지 전환을 외부에서 제어(페이드아웃 후 이동 등) */
+    onBeforeNavigate?: (to: string) => void;
+
+    /** (선택) 버튼 눌림 애니메이션 시간 */
+    pressMs?: number;
 }
 
 export const NextButton: React.FC<NextButtonProps> = ({
@@ -23,6 +27,8 @@ export const NextButton: React.FC<NextButtonProps> = ({
     x = 0,
     y = 0,
     positionMode = 'manual',
+    onBeforeNavigate,
+    pressMs = 260,
 }) => {
     const navigate = useNavigate();
     const [pressed, setPressed] = useState(false);
@@ -30,10 +36,18 @@ export const NextButton: React.FC<NextButtonProps> = ({
     const handleClick = () => {
         setPressed(true);
 
-        setTimeout(() => {
+        window.setTimeout(() => {
             setPressed(false);
+
+            // ✅ 외부 훅이 있으면 외부에서 전환(페이드) 처리
+            if (onBeforeNavigate) {
+                onBeforeNavigate(to);
+                return;
+            }
+
+            // 기존 동작 유지
             navigate(to);
-        }, 260);
+        }, pressMs ?? 260);
     };
 
     const buildPositionStyle = (): React.CSSProperties => {
@@ -43,14 +57,14 @@ export const NextButton: React.FC<NextButtonProps> = ({
                     position: 'absolute',
                     left: '50%',
                     top: y,
-                    transform: 'translateX(-50%)', // 위치용 transform
+                    transform: 'translateX(-50%)',
                 };
             case 'center-both':
                 return {
                     position: 'absolute',
                     left: '50%',
                     top: '50%',
-                    transform: 'translate(-50%, -50%)', // 위치용 transform
+                    transform: 'translate(-50%, -50%)',
                 };
             case 'manual':
             default:
