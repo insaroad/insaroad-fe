@@ -1,20 +1,20 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import styles from './TicketPage.module.css';
 
 import InsaroadFootBackground from '@/components/kiosk/background/InsaroadFootBackground';
 import insaroadBgImg from '@/assets/img-insaroad.png';
 
-import ticketImg from '@/assets/web/ticket.png'; // ✅ ticket.png 넣어주세요
-import storePhotoImg from '@/assets/web/place.png'; // ✅ 가게 사진(예시) 넣어주세요
+import ticketImg from '@/assets/web/ticket.png';
+import storePhotoImg from '@/assets/web/place.png';
 
 import { Header } from '@/components/web/nextPlace/Header';
-import { MapPlaceholder } from '@/components/web/nextPlace/MapPlaceholder';
 import { PlaceCard } from '@/components/web/nextPlace/PlaceCard';
 import { ActionLinks } from '@/components/web/nextPlace/ActionLinks';
 
 import { TicketTitle } from '@/components/web/ticket/TicketTitle';
 import { TicketBlock } from '@/components/web/ticket/TicketBlock';
 import { StorePhotoModal } from '@/components/web/ticket/StorePhotoModal';
+import { KakaoMap } from '@/components/web/nextPlace/KakaoMap';
 
 type TicketPageProps = {
     place?: {
@@ -22,9 +22,13 @@ type TicketPageProps = {
         nameEn: string;
         addressKo: string;
     };
+    // 이제 길찾기는 여기에서 직접 처리하니까, 상위에서 override 안 써도 됨(옵션으로만 둠)
     onOpenKakaoDirections?: () => void;
     onDownloadTicket?: () => void;
 };
+
+const ANNYEONG_INSADONG_LAT = 37.5745329;
+const ANNYEONG_INSADONG_LNG = 126.9834556;
 
 export const TicketPage: React.FC<TicketPageProps> = ({
     place = {
@@ -42,12 +46,27 @@ export const TicketPage: React.FC<TicketPageProps> = ({
         [isStorePhotoOpen]
     );
 
+const handleKakaoDirections = useCallback(() => {
+    if (onOpenKakaoDirections) {
+        onOpenKakaoDirections();
+        return;
+    }
+
+    const name = encodeURIComponent('안녕 인사동');
+    const lat = 37.574407774;
+    const lng = 126.983546688;
+
+    const url = `https://map.kakao.com/link/to/${name},${lat},${lng}`;
+
+    window.open(url, '_blank', 'noopener,noreferrer');
+}, [onOpenKakaoDirections]);
+
     return (
         <main className={styles.page}>
             {/* 배경은 항상 최하단 */}
             <InsaroadFootBackground src={insaroadBgImg} />
 
-            {/* ✅ 모달 열리면 배경만 30% */}
+            {/* 모달 열리면 배경만 30% */}
             <div className={`${styles.container} ${dimClass}`}>
                 <Header />
 
@@ -72,7 +91,21 @@ export const TicketPage: React.FC<TicketPageProps> = ({
                 <section className={styles.bottomSection}>
                     <h2 className={styles.placeTitle}>매듭을 받는 장소는...</h2>
 
-                    <MapPlaceholder label="카카오 지도 영역(자리)" />
+                    {/* ✅ 실제 카카오 지도 영역: 안녕 인사동 고정 */}
+                    <div
+                        style={{
+                            width: '100%',
+                            height: '240px',
+                            marginBottom: '16px',
+                            borderRadius: '12px',
+                            overflow: 'hidden',
+                        }}
+                    >
+                        <KakaoMap
+                            latitude={ANNYEONG_INSADONG_LAT}
+                            longitude={ANNYEONG_INSADONG_LNG}
+                        />
+                    </div>
 
                     <PlaceCard
                         nameKo={place.nameKo}
@@ -81,13 +114,13 @@ export const TicketPage: React.FC<TicketPageProps> = ({
                     />
 
                     <ActionLinks
-                        onOpenKakaoDirections={onOpenKakaoDirections}
+                        onOpenKakaoDirections={handleKakaoDirections}
                         onOpenKioskPhoto={() => setIsStorePhotoOpen(true)}
                     />
                 </section>
             </div>
 
-            {/* ✅ 가게 사진 모달 */}
+            {/* 가게 사진 모달 */}
             {isStorePhotoOpen && (
                 <StorePhotoModal
                     imageSrc={storePhotoImg}
