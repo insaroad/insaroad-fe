@@ -32,7 +32,7 @@ export const QrGuidePage: React.FC = () => {
     }, []);
 
     // ✅ NEXT용 base URL: env에서 가져오기
-    const baseQrTargetUrl = import.meta.env.VITE_NEXT_BASE_WEB_URL as string | undefined;
+    const baseQrTargetUrl = import.meta.env.VITE_BASE_WEB_URL as string | undefined;
 
     const qrTargetUrl = useMemo(() => {
         if (!baseQrTargetUrl?.trim() || !userCode) return '';

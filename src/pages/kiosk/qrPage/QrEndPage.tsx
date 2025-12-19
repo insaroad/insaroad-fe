@@ -33,9 +33,7 @@ export const QrEndPage: React.FC = () => {
     }, []);
 
     // ✅ TICKET용 base URL: env에서 가져오기
-    const baseQrTargetUrl = import.meta.env.VITE_TICKET_BASE_WEB_URL as
-        | string
-        | undefined;
+    const baseQrTargetUrl = import.meta.env.VITE_BASE_WEB_URL as string | undefined;
 
     const qrTargetUrl = useMemo(() => {
         if (!baseQrTargetUrl?.trim() || !userCode) return '';
