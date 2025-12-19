@@ -14,7 +14,7 @@
     transition:
         opacity 0.2s ease,
         transform 0.2s ease;
-}
+}  
 /* 페이드아웃 상태 */
 .containerLeaving {
     opacity: 0;
