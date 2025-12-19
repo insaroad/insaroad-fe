@@ -61,7 +61,9 @@ export const AnimalResultPage: React.FC = () => {
                     <InsaroadFootBackground src={insaroadBgImg} />
                 </div>
                 <KioskHeader />
-                <div style={{ textAlign: 'center', marginTop: '400px', fontSize: '32px' }}>
+                <div
+                    style={{ textAlign: 'center', marginTop: '400px', fontSize: '32px' }}
+                >
                     결과 불러오는 중 ..
                 </div>
             </div>
@@ -96,7 +98,7 @@ export const AnimalResultPage: React.FC = () => {
                             x={1600}
                             y={1000}
                             alt="처음 화면 이동하기"
-                            onClick={() => navigate('/kiosk/string/1')}
+                            onClick={() => navigate('/kiosk/string/2')}
                         />
                     </div>
                 </div>
@@ -118,4 +120,3 @@ export const AnimalResultPage: React.FC = () => {
 };
 
 export default AnimalResultPage;
-

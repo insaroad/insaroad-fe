@@ -9,8 +9,8 @@ import InsaroadSubtitle from '@/components/kiosk/insaroadTitle/InsaroadSubtitle'
 import InsaroadButton from '@/components/kiosk/button/InsaroadButton';
 import StringDecor from '@/components/kiosk/decor/StringDecor';
 import QuestionDecor from '@/components/kiosk/decor/QuestionDecor';
-import { startGame } from "@/api/game";
-import { storage } from "@/utils/storage";
+import { startGame } from '@/api/game';
+import { storage } from '@/utils/storage';
 
 import styles from './StartPage.module.css';
 
@@ -68,13 +68,13 @@ export const StartPage: React.FC = () => {
 
             // startStage가 1이면 한글이름 미션으로 바로 진입 (너가 말한 흐름)
             setTimeout(() => {
-            navigate("/kiosk/missions/korean-name"); // 미션 설명 페이지
+                navigate('/kiosk/missions/korean-name'); // 미션 설명 페이지
             }, 400);
         } catch (e) {
             setIsLeaving(false);
-            alert("게임 시작에 실패했습니다. 잠시 후 다시 시도해주세요.");
+            alert('게임 시작에 실패했습니다. 잠시 후 다시 시도해주세요.');
         }
-        };
+    };
 
     // ✅ "이벤트 이어서 진행하기" 버튼 클릭 시
     const handleContinueClick = () => {
