@@ -22,8 +22,10 @@ type BaseResponse<T> = {
 };
 
 const USER_CODE_STORAGE_KEY = 'userCode';
+const CURRENT_LOCATION_ID_KEY = 'currentLocationId';
+const INITIAL_LOCATION_ID = '1';
 
-// startStage → 라우팅 규칙 (프로젝트에 맞게 변경)
+// startStage → 라우팅 규칙
 const stageToRoute = (startStage: number) => {
     switch (startStage) {
         case 1:
@@ -33,8 +35,6 @@ const stageToRoute = (startStage: number) => {
         case 3:
             return '/kiosk/missions/signBoard';
         default:
-            // 현재 예시 값(1073741824) 같은 큰 수가 올 수 있으니,
-            // 일단 startStage를 쿼리/상태로 넘기는 방식도 고려 가능
             return '/kiosk';
     }
 };
@@ -48,7 +48,7 @@ if (!API_BASE_URL) {
 export const EnterNumPage: React.FC = () => {
     const navigate = useNavigate();
 
-    const [code, setCode] = useState<string>(''); // 최대 3자리
+    const [code, setCode] = useState<string>('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorText, setErrorText] = useState<string>('');
 
@@ -83,7 +83,7 @@ export const EnterNumPage: React.FC = () => {
         requestedRef.current = true;
         setIsSubmitting(true);
 
-        // 요구사항: 입력한 3자리 코드 localStorage 저장
+        // 입력한 3자리 코드 localStorage 저장
         localStorage.setItem(USER_CODE_STORAGE_KEY, code);
 
         const controller = new AbortController();
@@ -105,15 +105,17 @@ export const EnterNumPage: React.FC = () => {
 
                 const json: BaseResponse<StartGameData> = await res.json();
 
-                // 백엔드 스펙대로: data.startStage 사용
                 if (!json.success) {
                     throw new Error(json.message || 'Request failed');
                 }
 
                 const { userCode, startStage } = json.data;
 
-                // 응답의 userCode를 저장(서버가 정규화/검증한 값이 있을 수 있으므로)
+                // 응답 userCode 저장(검증된 값)
                 localStorage.setItem(USER_CODE_STORAGE_KEY, userCode);
+
+                // ✅ 이어서/재진입 시작 성공 시: currentLocationId=1 세팅
+                localStorage.setItem(CURRENT_LOCATION_ID_KEY, INITIAL_LOCATION_ID);
 
                 const nextRoute = stageToRoute(startStage);
                 navigate(nextRoute, { replace: true });
@@ -121,6 +123,9 @@ export const EnterNumPage: React.FC = () => {
                 setErrorText('코드를 확인할 수 없습니다. 다시 입력해주세요.');
                 setCode('');
                 localStorage.removeItem(USER_CODE_STORAGE_KEY);
+
+                // ✅ 실패 시 정리
+                localStorage.removeItem(CURRENT_LOCATION_ID_KEY);
             } finally {
                 setIsSubmitting(false);
             }
