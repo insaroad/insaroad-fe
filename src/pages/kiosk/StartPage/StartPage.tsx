@@ -48,6 +48,16 @@ export const StartPage: React.FC = () => {
     const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 910;
     const buttonX = centerX - buttonWidth / 2;
 
+    // ✅ [추가됨] "새로운 이벤트 참여하기" 버튼 클릭 핸들러
+    const handleNewEventClick = () => {
+        setIsLeaving(true); // 페이드아웃 시작
+
+        setTimeout(() => {
+            // 👇 여기에 이동하고 싶은 경로를 입력하세요 (예: /kiosk/register)
+            navigate('/kiosk/missions/korean-name');
+        }, 400);
+    };
+
     // ✅ "이벤트 이어서 진행하기" 버튼 클릭 시
     const handleContinueClick = () => {
         // 1) 먼저 현재 화면 페이드아웃
@@ -81,6 +91,7 @@ export const StartPage: React.FC = () => {
                     x={buttonX}
                     y={(titleY ?? 1000) + 600}
                     text="새로운 이벤트 참여하기"
+                    onClick={handleNewEventClick}
                 />
 
                 <InsaroadButton

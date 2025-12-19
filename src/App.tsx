@@ -40,20 +40,19 @@ export function App() {
                     <Route path="keep" element={<EnterNumPage />} />
 
                     <Route path="missions">
-                        <Route path="animal">
-                            <Route index element={<MissionDescriptionPageAnimal />} />
-                            <Route path="page1" element={<AnimalPage1 />} />
-                            <Route path="page2" element={<AnimalPage2 />} />
-                            <Route path="page3" element={<AnimalPage3 />} />
-                            <Route path="result" element={<AnimalResultPage />} />
-                        </Route>
-
                         <Route path="korean-name">
                             <Route index element={<MissionDescriptionPageKorean />} />
                             <Route path="page1" element={<KoreanNamePage1 />} />
                             <Route path="page2" element={<KoreanNamePage2 />} />
                             <Route path="page3" element={<KoreanNamePage3 />} />
                             <Route path="result" element={<KoreanNameResultPage />} />
+                        </Route>
+                        <Route path="animal">
+                            <Route index element={<MissionDescriptionPageAnimal />} />
+                            <Route path="page1" element={<AnimalPage1 />} />
+                            <Route path="page2" element={<AnimalPage2 />} />
+                            <Route path="page3" element={<AnimalPage3 />} />
+                            <Route path="result" element={<AnimalResultPage />} />
                         </Route>
 
                         <Route path="signboard">
