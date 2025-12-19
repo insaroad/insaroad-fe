@@ -32,11 +32,21 @@ export const KoreanNamePage1: React.FC = () => {
         fadeNavigate('/kiosk');
     }, [fadeNavigate]);
 
+    // const handleConfirm = useCallback(() => {
+    //     console.log(`Selected birthday: ${year}-${month}-${day}`);
+    //     // ✅ 확인 시 페이드아웃 후 다음 페이지
+    //     fadeNavigate('/kiosk/missions/korean-name/page2'); // TODO: 실제 라우트로 맞추세요
+    // }, [fadeNavigate, year, month, day]);
+
     const handleConfirm = useCallback(() => {
-        console.log(`Selected birthday: ${year}-${month}-${day}`);
-        // ✅ 확인 시 페이드아웃 후 다음 페이지
-        fadeNavigate('/kiosk/missions/korean-name/page2'); // TODO: 실제 라우트로 맞추세요
-    }, [fadeNavigate, year, month, day]);
+        const birthDate = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+        navigate("/kiosk/missions/korean-name/page2", {
+            state: { birthDate },
+        });
+    }, [navigate, year, month, day]);
+
+    
 
     return (
         <main

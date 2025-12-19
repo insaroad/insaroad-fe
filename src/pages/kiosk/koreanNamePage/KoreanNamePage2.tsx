@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { InsaroadButton } from '@/components/kiosk/button/InsaroadButton';
 import { TitleSection } from './components/TitleSection';
 import { GenderSelector } from './components/GenderSelector';
@@ -14,6 +15,8 @@ import useRouteFadeNavigate from '@/hooks/kiosk/useRouteFadeNavigate';
 
 export const KoreanNamePage2: React.FC = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const birthDate = (location.state as any)?.birthDate as string | undefined;
     const [gender, setGender] = useState<Gender>('male');
     const [entered, setEntered] = useState(false);
 
@@ -27,10 +30,25 @@ export const KoreanNamePage2: React.FC = () => {
         fadeNavigate('/kiosk');
     }, [fadeNavigate]);
 
+    // const handleConfirm = useCallback(() => {
+    //     console.log('Selected gender:', gender);
+    //     fadeNavigate('/kiosk/missions/korean-name/page3'); // TODO: 실제 라우트로 맞추세요
+    // }, [fadeNavigate, gender]);
+
     const handleConfirm = useCallback(() => {
-        console.log('Selected gender:', gender);
-        fadeNavigate('/kiosk/missions/korean-name/page3'); // TODO: 실제 라우트로 맞추세요
-    }, [fadeNavigate, gender]);
+        if (!birthDate) {
+            // Page1을 거치지 않고 들어온 경우 방어
+            fadeNavigate("/kiosk/missions/korean-name/page1");
+            return;
+    }
+
+    // 프론트 gender("male"/"female") -> 백엔드 "MALE"/"FEMALE"
+    const apiGender = gender === "male" ? "MALE" : "FEMALE";
+
+    navigate("/kiosk/missions/korean-name/page3", {
+        state: { birthDate, gender: apiGender },
+    });
+    }, [birthDate, gender, navigate, fadeNavigate]);
 
     return (
         <main
