@@ -13,14 +13,16 @@ import { startGame } from '@/api/game';
 import { storage } from '@/utils/storage';
 
 import styles from './StartPage.module.css';
-
 import insaroadBgImg from '@/assets/img-insaroad.png';
+
+const CURRENT_LOCATION_ID_KEY = 'currentLocationId';
+const INITIAL_LOCATION_ID = '1';
 
 export const StartPage: React.FC = () => {
     const [mode, setMode] = useState<PositionMode>('center-both');
     const [titleY, setTitleY] = useState<number | undefined>(undefined);
     const [contentVisible, setContentVisible] = useState(false);
-    const [isLeaving, setIsLeaving] = useState(false); // ✅ 페이드아웃 상태
+    const [isLeaving, setIsLeaving] = useState(false);
 
     const navigate = useNavigate();
 
@@ -50,25 +52,21 @@ export const StartPage: React.FC = () => {
     const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 910;
     const buttonX = centerX - buttonWidth / 2;
 
-    // ✅ [추가됨] "새로운 이벤트 참여하기" 버튼 클릭 핸들러
-    // const handleNewEventClick = () => {
-    //     setIsLeaving(true); // 페이드아웃 시작
-
-    //     setTimeout(() => {
-    //         // 👇 여기에 이동하고 싶은 경로를 입력하세요 (예: /kiosk/register)
-    //         navigate('/kiosk/missions/korean-name');
-    //     }, 400);
-    // };
+    // ✅ "새로운 이벤트 참여하기"
     const handleNewEventClick = async () => {
         try {
             setIsLeaving(true);
 
             const { userCode, startStage } = await startGame();
             storage.setUserCode(userCode);
+
+            // ✅ 새 이벤트 시작 시: currentLocationId=1 세팅
+            localStorage.setItem(CURRENT_LOCATION_ID_KEY, INITIAL_LOCATION_ID);
+
             void startStage;
-            // startStage가 1이면 한글이름 미션으로 바로 진입 (너가 말한 흐름)
+
             setTimeout(() => {
-                navigate('/kiosk/missions/korean-name'); // 미션 설명 페이지
+                navigate('/kiosk/missions/korean-name');
             }, 400);
         } catch (e) {
             setIsLeaving(false);
@@ -76,13 +74,13 @@ export const StartPage: React.FC = () => {
         }
     };
 
-    // ✅ "이벤트 이어서 진행하기" 버튼 클릭 시
+    // ✅ "이벤트 이어서 진행하기"
     const handleContinueClick = () => {
-        // 1) 먼저 현재 화면 페이드아웃
         setIsLeaving(true);
 
-        // 2) 페이드아웃 트랜지션 시간 후 실제 라우팅
-        //    (CSS에서 transition: 0.4s 로 맞출 예정)
+        // ✅ 이어서 시작 “진입” 시점에 초기화가 필요하다면 여기서 세팅
+        localStorage.setItem(CURRENT_LOCATION_ID_KEY, INITIAL_LOCATION_ID);
+
         setTimeout(() => {
             navigate('/kiosk/keep');
         }, 400);
@@ -97,9 +95,7 @@ export const StartPage: React.FC = () => {
             <InsaroadTitle text="INSAROAD" mode={mode} y={titleY} fontSize={100} />
 
             <div
-                className={`${styles.contentGroup} ${
-                    contentVisible ? styles.contentGroupVisible : ''
-                }`}
+                className={`${styles.contentGroup} ${contentVisible ? styles.contentGroupVisible : ''}`}
             >
                 {titleY !== undefined && <InsaroadSubtitle y={titleY + 130} />}
 
