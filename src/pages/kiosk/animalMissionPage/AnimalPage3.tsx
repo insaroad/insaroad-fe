@@ -21,13 +21,66 @@ import painting3 from './assets/painting3.png';
 import painting4 from './assets/painting4.png';
 import painting5 from './assets/painting5.png';
 
+import type { AnimalType } from '@/api/animalMission';
+import { submitAnimalMission } from '@/api/animalMission';
+
+// 인덱스 -> 동물 타입 매핑
+const indexToAnimalMap: Record<number, AnimalType> = {
+    1: 'CRANE',
+    2: 'HAETAE',
+    3: 'TURTLE',
+    4: 'TIGER',
+    5: 'MAGPIE',
+};
+
 export const AnimalPage3: React.FC = () => {
     const navigate = useNavigate();
     const [selectedCount, setSelectedCount] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const { isLeaving, fadeNavigate, durationMs } = useRouteFadeNavigate({
         durationMs: 350, // ✅ 통일
     });
+
+    const handleSubmit = async () => {
+        if (isSubmitting || selectedIndex === null) return;
+        setIsSubmitting(true);
+
+        try {
+            // LocalStorage에서 이전 선택들 가져오기
+            const userCode = localStorage.getItem('userCode') || '';
+            const currentLocationId = localStorage.getItem('currentLocationId') || '';
+            const patternAnimalsStr = localStorage.getItem('patternAnimals');
+            const entranceAnimal = localStorage.getItem('entranceAnimal') as AnimalType;
+            const paintingAnimal = indexToAnimalMap[selectedIndex];
+
+            if (!patternAnimalsStr || !entranceAnimal) {
+                console.error('이전 선택 데이터가 없습니다.');
+                return;
+            }
+
+            const patternAnimals = JSON.parse(patternAnimalsStr) as [AnimalType, AnimalType];
+
+            // API 호출
+            const result = await submitAnimalMission({
+                userCode,
+                currentLocationId,
+                patternAnimals,
+                entranceAnimal,
+                paintingAnimal,
+            });
+
+            // 결과를 LocalStorage에 저장
+            localStorage.setItem('animalResult', JSON.stringify(result));
+
+            // 결과 페이지로 이동
+            fadeNavigate('/kiosk/missions/animal/result');
+        } catch (error) {
+            console.error('API 호출 실패:', error);
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div
@@ -64,7 +117,10 @@ export const AnimalPage3: React.FC = () => {
                 imageHeight={400}
                 maxSelectable={1}
                 columnGap={100}
-                onSelectionChange={(selected) => setSelectedCount(selected.length)}
+                onSelectionChange={(selected) => {
+                    setSelectedCount(selected.length);
+                    setSelectedIndex(selected[0] || null);
+                }}
             />
 
             {selectedCount === 1 && (
@@ -74,7 +130,7 @@ export const AnimalPage3: React.FC = () => {
                     height={100}
                     positionMode="center-x"
                     y={1850}
-                    onBeforeNavigate={(to) => fadeNavigate(to)}
+                    onBeforeNavigate={() => handleSubmit()}
                 />
             )}
         </div>

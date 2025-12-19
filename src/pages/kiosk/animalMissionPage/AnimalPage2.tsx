@@ -20,6 +20,16 @@ import styles from './AnimalPage2.module.css';
 import useRouteFadeNavigate from '@/hooks/kiosk/useRouteFadeNavigate';
 
 import CountDown from '@/components/kiosk/countDown/CountDown';
+import type { AnimalType } from '@/api/animalMission';
+
+// 인덱스 -> 동물 타입 매핑
+const indexToAnimalMap: Record<number, AnimalType> = {
+    1: 'CRANE',
+    2: 'HAETAE',
+    3: 'TURTLE',
+    4: 'TIGER',
+    5: 'MAGPIE',
+};
 
 export const AnimalPage2: React.FC = () => {
     const navigate = useNavigate();
@@ -31,9 +41,13 @@ export const AnimalPage2: React.FC = () => {
     const lockRef = useRef(false);
 
     const handleSelect = useCallback(
-        (_idx: number) => {
+        (idx: number) => {
             if (lockRef.current) return;
             lockRef.current = true;
+
+            // LocalStorage에 선택된 동물 저장
+            const animal = indexToAnimalMap[idx];
+            localStorage.setItem('entranceAnimal', animal);
 
             // ✅ 0.2초 동안 눌림 피드백 후 페이드아웃 시작
             window.setTimeout(() => {
