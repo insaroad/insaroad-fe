@@ -26,6 +26,8 @@ const USER_CODE_STORAGE_KEY = 'userCode';
 // startStage → 라우팅 규칙 (프로젝트에 맞게 변경)
 const stageToRoute = (startStage: number) => {
     switch (startStage) {
+        case 1:
+            return '/kiosk/missions/korean-name';
         case 2:
             return '/kiosk/missions/animal';
         case 3:
