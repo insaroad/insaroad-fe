@@ -37,10 +37,10 @@ const stageToRoute = (startStage: number) => {
     }
 };
 
-const API_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL as string;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
 if (!API_BASE_URL) {
-    throw new Error('VITE_SERVER_BASE_URL is not defined. Check your .env file.');
+    throw new Error('VITE_API_BASE_URL is not defined. Check your .env file.');
 }
 
 export const EnterNumPage: React.FC = () => {
