@@ -131,15 +131,9 @@ export const KoreanNameResultPage: React.FC = () => {
 
                 <p className={styles.summary}>{overallExplanation}</p>
 
-<<<<<<< HEAD
-                {syllableDescriptions.map((text, idx) => (
-                    <p key={idx} className={styles.detail}>
-                        {text}
-=======
                 {syllables.map((s, idx) => (
                     <p key={`${s.syllable}-${idx}`} className={styles.detail}>
                         {s.syllable} : {s.description}
->>>>>>> 4dde7996d0d89d54c18ef05b2222356854f40d94
                     </p>
                 ))}
             </section>
