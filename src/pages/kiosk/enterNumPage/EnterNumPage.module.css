@@ -16,3 +16,25 @@
         transform: translateY(0);
     }
 }
+.errorText {
+    position: absolute;
+    top: 650px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-family:
+        'Pretendard',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+
+    font-size: 48px; /* ⭐ 크게 */
+    font-weight: 600;
+    color: #d32f2f; /* 명확한 에러 레드 */
+    text-align: center;
+    white-space: nowrap;
+
+    /* 키오스크 가독성 보정 */
+    letter-spacing: -0.01em;
+}
