@@ -17,6 +17,9 @@ export const SignBoardPage2: React.FC = () => {
 
     const [remainingSeconds, setRemainingSeconds] = useState<number>(60);
     const showExtraButton = remainingSeconds <= 50;
+    
+    // ✅ localStorage에서 answerImageUrl 가져오기
+    const [answerImageUrl, setAnswerImageUrl] = useState<string>(startbucksImg);
 
     // ✅ 페이드 전환 상태
     const [entered, setEntered] = useState(false);
@@ -28,6 +31,14 @@ export const SignBoardPage2: React.FC = () => {
         // 다음 프레임에 enter 붙여서 자연스럽게
         const raf = requestAnimationFrame(() => setEntered(true));
         return () => cancelAnimationFrame(raf);
+    }, []);
+
+    // ✅ localStorage에서 이미지 로드
+    useEffect(() => {
+        const savedImageUrl = localStorage.getItem('answerImageUrl');
+        if (savedImageUrl) {
+            setAnswerImageUrl(savedImageUrl);
+        }
     }, []);
 
     const fadeOutAndNavigate = useCallback(
@@ -100,7 +111,7 @@ export const SignBoardPage2: React.FC = () => {
 
                 <div className={styles.imageWrapper}>
                     <img
-                        src={startbucksImg}
+                        src={answerImageUrl}
                         alt="한글 간판 예시 이미지"
                         className={styles.exampleImage}
                         loading="eager"

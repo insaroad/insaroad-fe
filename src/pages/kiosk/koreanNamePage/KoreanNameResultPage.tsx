@@ -45,9 +45,14 @@ export const KoreanNameResultPage: React.FC = () => {
     const romanization = `[${result.romanizedName}]`;
 
     const overallExplanation = result.overallExplanation;
-    const syllableDescriptions: string[] = (result.syllables ?? []).map(
-        (s: any) => s.description
-    );
+    // ✅ 여기! syllables를 그대로 받기
+    const syllables = (result.syllables ?? []) as Array<{
+        syllable: string;
+        description: string;
+    }>;
+    // const syllableDescriptions: string[] = (result.syllables ?? []).map(
+    // (s: any) => s.description
+    // );
 
     // const summaryText = `당신은 ‘${result.mainElementType}’의 기운을 가지고 있습니다.`;
     // const detailText1 = result.syllables?.[0]
@@ -126,9 +131,15 @@ export const KoreanNameResultPage: React.FC = () => {
 
                 <p className={styles.summary}>{overallExplanation}</p>
 
+<<<<<<< HEAD
                 {syllableDescriptions.map((text, idx) => (
                     <p key={idx} className={styles.detail}>
                         {text}
+=======
+                {syllables.map((s, idx) => (
+                    <p key={`${s.syllable}-${idx}`} className={styles.detail}>
+                        {s.syllable} : {s.description}
+>>>>>>> 4dde7996d0d89d54c18ef05b2222356854f40d94
                     </p>
                 ))}
             </section>

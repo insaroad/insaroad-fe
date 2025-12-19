@@ -65,7 +65,7 @@ export const StartPage: React.FC = () => {
 
             const { userCode, startStage } = await startGame();
             storage.setUserCode(userCode);
-
+            void startStage;
             // startStage가 1이면 한글이름 미션으로 바로 진입 (너가 말한 흐름)
             setTimeout(() => {
                 navigate('/kiosk/missions/korean-name'); // 미션 설명 페이지

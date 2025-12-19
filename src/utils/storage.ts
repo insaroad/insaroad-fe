@@ -1,4 +1,4 @@
-const USER_CODE_KEY = "insaroad_userCode";
+const USER_CODE_KEY = "userCode";
 
 export const storage = {
   getUserCode(): string | null {
