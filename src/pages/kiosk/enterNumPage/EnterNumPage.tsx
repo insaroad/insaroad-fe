@@ -29,7 +29,7 @@ const stageToRoute = (startStage: number) => {
         case 2:
             return '/kiosk/missions/animal';
         case 3:
-            return '/kiosk/missions/korean-name';
+            return '/kiosk/missions/signBoard';
         default:
             // 현재 예시 값(1073741824) 같은 큰 수가 올 수 있으니,
             // 일단 startStage를 쿼리/상태로 넘기는 방식도 고려 가능
