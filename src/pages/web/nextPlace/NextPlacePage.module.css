@@ -1,12 +1,6 @@
 .page {
     position: relative;
-    height: 100%;
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
 }
 
 .container {
@@ -144,4 +138,9 @@
 .navBtn:focus-visible {
     outline: 2px solid rgba(0, 0, 0, 0.35);
     outline-offset: 2px;
+}
+@media (min-width: 768px) {
+    .page {
+        height: 100%;
+    }
 }

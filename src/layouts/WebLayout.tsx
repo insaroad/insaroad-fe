@@ -1,45 +1,61 @@
-import { useEffect, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './WebLayout.module.css';
 
-const PHONE_W = 390; // iPhone 12/12 Pro CSS viewport width
-const PHONE_H = 844; // iPhone 12/12 Pro CSS viewport height
+const PHONE_W = 390;
+const PHONE_H = 844;
 const DESKTOP_MIN_WIDTH = 768;
 
 export default function WebLayout() {
-    const [viewport, setViewport] = useState(() => ({
-        w: typeof window !== 'undefined' ? window.innerWidth : PHONE_W,
-        h: typeof window !== 'undefined' ? window.innerHeight : PHONE_H,
-    }));
+    const [vw, setVw] = useState(() =>
+        typeof window !== 'undefined' ? window.innerWidth : PHONE_W
+    );
+    const [vh, setVh] = useState(() =>
+        typeof window !== 'undefined' ? window.innerHeight : PHONE_H
+    );
 
     useEffect(() => {
-        const onResize = () =>
-            setViewport({ w: window.innerWidth, h: window.innerHeight });
+        const onResize = () => {
+            setVw(window.innerWidth);
+            setVh(window.innerHeight);
+        };
         window.addEventListener('resize', onResize);
         return () => window.removeEventListener('resize', onResize);
     }, []);
 
-    const isDesktop = viewport.w >= DESKTOP_MIN_WIDTH;
+    // ✅ Web route로 들어오면, body 스크롤을 강제로 정상화 (kiosk에서 overflow hidden을 걸어둔 경우 대비)
+    useEffect(() => {
+        const prevHtmlOverflow = document.documentElement.style.overflow;
+        const prevBodyOverflow = document.body.style.overflow;
+        const prevBodyHeight = document.body.style.height;
 
-    const scale = useMemo(() => {
-        const s = Math.min(viewport.w / PHONE_W, viewport.h / PHONE_H);
-        // 확대를 제한하고 싶으면 상한을 두세요. (예: 1.15)
-        // return Math.min(s, 1.15);
-        return s;
-    }, [viewport.w, viewport.h]);
+        document.documentElement.style.overflow = 'auto';
+        document.body.style.overflow = 'auto';
+        document.body.style.height = 'auto';
 
-    // ✅ 모바일: 기존 반응형 그대로
+        return () => {
+            document.documentElement.style.overflow = prevHtmlOverflow;
+            document.body.style.overflow = prevBodyOverflow;
+            document.body.style.height = prevBodyHeight;
+        };
+    }, []);
+
+    const isDesktop = vw >= DESKTOP_MIN_WIDTH;
+
+    const scale = useMemo(() => Math.min(vw / PHONE_W, vh / PHONE_H), [vw, vh]);
+
+    // ✅ 모바일: "문서(body) 스크롤"로 처리 (가장 안정적)
     if (!isDesktop) {
         return (
-            <div className={styles.mobileStage}>
+            <div className={styles.mobileRoot}>
                 <Outlet />
             </div>
         );
     }
 
-    // ✅ 데스크탑: 폰 프레임(390x844) + 검은 배경
+    // ✅ 데스크탑: 폰 프레임(stage) + 내부 스크롤
     return (
-        <div className={styles.shell} aria-label="web-phone-frame-shell">
+        <div className={styles.shell}>
             <div
                 className={styles.stage}
                 style={{
@@ -48,7 +64,9 @@ export default function WebLayout() {
                     transform: `translate(-50%, -50%) scale(${scale})`,
                 }}
             >
-                <Outlet />
+                <div className={styles.scrollArea}>
+                    <Outlet />
+                </div>
             </div>
         </div>
     );

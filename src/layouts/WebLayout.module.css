@@ -1,9 +1,11 @@
-/* 모바일은 기존 반응형 유지 */
-.mobileStage {
+/* 모바일: 문서 스크롤을 쓰므로 overflow를 건드리지 않는다 */
+.mobileRoot {
+    min-height: 100vh;
+    min-height: 100svh;
     min-height: 100dvh;
 }
 
-/* 데스크탑: 폰 프레임 바깥 검은 배경 */
+/* 데스크탑: 바깥 검은 배경 */
 .shell {
     position: fixed;
     inset: 0;
@@ -11,13 +13,21 @@
     overflow: hidden;
 }
 
-/* 폰 스테이지(390x844)를 중앙에 두고 scale */
+/* 폰 스테이지 */
 .stage {
     position: absolute;
     left: 50%;
     top: 50%;
     transform-origin: center;
-
     background: #fff;
-    overflow: hidden; /* 스테이지 밖으로 나가는 요소 클립 */
+    overflow: hidden; /* stage는 클립만 */
+}
+
+/* 데스크탑에서만 내부 스크롤 */
+.scrollArea {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }

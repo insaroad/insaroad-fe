@@ -9,9 +9,10 @@ type PhotoModalProps = {
 export const PhotoModal: React.FC<PhotoModalProps> = ({ imageSrc, onClose }) => {
     // 스크롤 잠금 (모바일 필수)
     useEffect(() => {
+        const prev = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
         return () => {
-            document.body.style.overflow = '';
+            document.body.style.overflow = prev;
         };
     }, []);
 

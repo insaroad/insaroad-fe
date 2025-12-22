@@ -1,12 +1,6 @@
 .page {
     position: relative;
-    height: 100%; /* ✅ 내부 스크롤 컨테이너로 고정 */
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-
-    -webkit-overflow-scrolling: touch; /* ✅ iOS */
-    overscroll-behavior: contain; /* ✅ 상위 영향 차단 */
 }
 
 .container {
@@ -51,4 +45,10 @@
     font-weight: 400;
     line-height: 1.25;
     word-break: keep-all;
+}
+
+@media (min-width: 768px) {
+    .page {
+        height: 100%;
+    }
 }

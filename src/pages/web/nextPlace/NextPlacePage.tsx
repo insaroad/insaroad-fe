@@ -274,7 +274,7 @@ export const NextPlacePage: React.FC<NextPlacePageProps> = ({
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        height: '100%',
+                        minHeight: '100dvh',
                     }}
                 >
                     <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#555' }}>
