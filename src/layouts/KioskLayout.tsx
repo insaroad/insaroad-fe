@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import styles from './KioskLayout.module.css';
 
