@@ -1,6 +1,6 @@
 .page {
     position: relative;
-    height: 100dvh; /* ✅ 내부 스크롤 컨테이너로 고정 */
+    height: 100%; /* ✅ 내부 스크롤 컨테이너로 고정 */
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;

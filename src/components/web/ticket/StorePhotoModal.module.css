@@ -1,5 +1,5 @@
 .overlay {
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: 9999;
 
@@ -11,8 +11,8 @@
 }
 
 .image {
-    width: min(80vw, 22rem); /* ⬅️ 핵심: 크기 축소 */
-    max-height: 60vh; /* ⬅️ 높이도 살짝 줄이기 */
+    width: min(90%, 22rem); /* ⬅️ 핵심: 크기 축소 */
+    max-height: 60%; /* ⬅️ 높이도 살짝 줄이기 */
     height: auto;
 
     border-radius: 1rem;

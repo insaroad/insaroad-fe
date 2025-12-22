@@ -1,0 +1,23 @@
+/* 모바일은 기존 반응형 유지 */
+.mobileStage {
+    min-height: 100dvh;
+}
+
+/* 데스크탑: 폰 프레임 바깥 검은 배경 */
+.shell {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    overflow: hidden;
+}
+
+/* 폰 스테이지(390x844)를 중앙에 두고 scale */
+.stage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: center;
+
+    background: #fff;
+    overflow: hidden; /* 스테이지 밖으로 나가는 요소 클립 */
+}

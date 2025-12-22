@@ -1,5 +1,5 @@
 .overlay {
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: 9999;
 
@@ -11,8 +11,8 @@
 }
 
 .image {
-    max-width: 90vw;
-    max-height: 70vh;
+    max-width: 90%;
+    max-height: 70%;
 
     border-radius: 1rem;
     object-fit: contain;
