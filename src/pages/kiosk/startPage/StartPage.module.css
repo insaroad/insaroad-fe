@@ -1,9 +1,9 @@
 .container {
-    position: relative; /* 배경 absolute 기준 */
-    width: 100vw;
-    height: 100vh;
+    position: relative;
+    width: 100%;
+    height: 100%;
     background-color: #fff;
-    overflow: hidden; /* 혹시 밖으로 튀어 나가는 요소 방지 */
+    overflow: hidden;
     opacity: 1;
     transition: opacity 0.15s ease-in-out;
 }
@@ -14,7 +14,7 @@
     transition:
         opacity 0.2s ease,
         transform 0.2s ease;
-}  
+}
 /* 페이드아웃 상태 */
 .containerLeaving {
     opacity: 0;

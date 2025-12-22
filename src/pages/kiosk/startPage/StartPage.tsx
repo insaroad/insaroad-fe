@@ -15,6 +15,8 @@ import { storage } from '@/utils/storage';
 import styles from './StartPage.module.css';
 import insaroadBgImg from '@/assets/img-insaroad.png';
 
+import { KIOSK_VIEWPORT } from '@/constants/kioskViewport';
+
 const CURRENT_LOCATION_ID_KEY = 'currentLocationId';
 const INITIAL_LOCATION_ID = '1';
 
@@ -28,18 +30,14 @@ export const StartPage: React.FC = () => {
 
     useEffect(() => {
         const moveTimer = setTimeout(() => {
-            if (typeof window !== 'undefined') {
-                const centerY = window.innerHeight / 2;
-                setTitleY(centerY - 500);
-            } else {
-                setTitleY(700);
-            }
+            const centerY = KIOSK_VIEWPORT.height / 2;
+            setTitleY(centerY - 500);
             setMode('center-x');
         }, 500);
 
         const contentTimer = setTimeout(() => {
             setContentVisible(true);
-        }, 500 + 400);
+        }, 900);
 
         return () => {
             clearTimeout(moveTimer);
@@ -49,7 +47,7 @@ export const StartPage: React.FC = () => {
 
     const buttonWidth = 900;
     const buttonHeight = 150;
-    const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 910;
+    const centerX = KIOSK_VIEWPORT.width / 2;
     const buttonX = centerX - buttonWidth / 2;
 
     // ✅ "새로운 이벤트 참여하기"

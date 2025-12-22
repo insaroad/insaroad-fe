@@ -33,7 +33,7 @@ const stageToRoute = (startStage: number) => {
         case 2:
             return '/kiosk/missions/animal';
         case 3:
-            return '/kiosk/missions/signBoard';
+            return '/kiosk/missions/signboard';
         default:
             return '/kiosk';
     }
