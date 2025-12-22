@@ -1,0 +1,16 @@
+.shell {
+    position: fixed;
+    inset: 0;
+    background: #000; /* 뷰포트 밖은 검은색 */
+    overflow: hidden;
+}
+
+/* 1820x2250 고정 스테이지를 화면 중앙에 두고 scale */
+.stage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: center;
+    background: #fff; /* kiosk 화면 바탕 (원하면 유지/변경) */
+    overflow: hidden; /* 스테이지 바깥으로 튀는 요소 클립 */
+}

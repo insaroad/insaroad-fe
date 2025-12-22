@@ -118,9 +118,12 @@ export const NextPlacePage: React.FC<NextPlacePageProps> = ({
             try {
                 setIsLoading(true);
 
-                const response = await api.get<ApiResponse<GameProgressData>>('/api/games/progress', {
-                    params: { userCode: code },
-                });
+                const response = await api.get<ApiResponse<GameProgressData>>(
+                    '/api/games/progress',
+                    {
+                        params: { userCode: code },
+                    }
+                );
 
                 const { success, data, message } = response.data;
 
@@ -214,8 +217,14 @@ export const NextPlacePage: React.FC<NextPlacePageProps> = ({
         [totalSlides]
     );
 
-    const handlePrev = useCallback(() => scrollToIndex(activeIndex - 1), [activeIndex, scrollToIndex]);
-    const handleNext = useCallback(() => scrollToIndex(activeIndex + 1), [activeIndex, scrollToIndex]);
+    const handlePrev = useCallback(
+        () => scrollToIndex(activeIndex - 1),
+        [activeIndex, scrollToIndex]
+    );
+    const handleNext = useCallback(
+        () => scrollToIndex(activeIndex + 1),
+        [activeIndex, scrollToIndex]
+    );
     const scrollEndTimer = useRef<number | null>(null);
 
     useEffect(() => {
@@ -265,7 +274,7 @@ export const NextPlacePage: React.FC<NextPlacePageProps> = ({
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        height: '100vh',
+                        height: '100%',
                     }}
                 >
                     <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#555' }}>
@@ -277,18 +286,18 @@ export const NextPlacePage: React.FC<NextPlacePageProps> = ({
     }
 
     if (gameData?.completed) {
-    return (
-        <TicketPage
-            onDownloadTicket={() => {
-                if (gameData.finish?.exchangeUrl) {
-                    window.open(gameData.finish.exchangeUrl, '_blank');
-                } else {
-                    alert('교환권 URL이 없습니다.');
-                }
-            }}
-        />
-    );
-}
+        return (
+            <TicketPage
+                onDownloadTicket={() => {
+                    if (gameData.finish?.exchangeUrl) {
+                        window.open(gameData.finish.exchangeUrl, '_blank');
+                    } else {
+                        alert('교환권 URL이 없습니다.');
+                    }
+                }}
+            />
+        );
+    }
 
     if (slides.length === 0) {
         return (
@@ -296,9 +305,17 @@ export const NextPlacePage: React.FC<NextPlacePageProps> = ({
                 <InsaroadFootBackground src={insaroadBgImg} />
                 <div className={styles.container}>
                     <Header />
-                    <div style={{ textAlign: 'center', marginTop: '100px', padding: '20px' }}>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            marginTop: '100px',
+                            padding: '20px',
+                        }}
+                    >
                         <p>방문할 장소 정보가 없습니다.</p>
-                        <p style={{ fontSize: '0.9em', color: '#888' }}>userCode: {code}</p>
+                        <p style={{ fontSize: '0.9em', color: '#888' }}>
+                            userCode: {code}
+                        </p>
                     </div>
                 </div>
             </main>
@@ -331,7 +348,12 @@ export const NextPlacePage: React.FC<NextPlacePageProps> = ({
                             aria-label="이전 장소"
                             disabled={!canPrev}
                         >
-                            <img className={styles.navIcon} src={arrowLeftImg} alt="" aria-hidden />
+                            <img
+                                className={styles.navIcon}
+                                src={arrowLeftImg}
+                                alt=""
+                                aria-hidden
+                            />
                         </button>
 
                         <button
@@ -343,7 +365,12 @@ export const NextPlacePage: React.FC<NextPlacePageProps> = ({
                             aria-label="다음 장소"
                             disabled={!canNext}
                         >
-                            <img className={styles.navIcon} src={arrowRightImg} alt="" aria-hidden />
+                            <img
+                                className={styles.navIcon}
+                                src={arrowRightImg}
+                                alt=""
+                                aria-hidden
+                            />
                         </button>
 
                         <div
@@ -366,7 +393,10 @@ export const NextPlacePage: React.FC<NextPlacePageProps> = ({
                                             }}
                                         >
                                             {isValidLatLng(s.latitude, s.longitude) ? (
-                                                <KakaoMap latitude={s.latitude!} longitude={s.longitude!} />
+                                                <KakaoMap
+                                                    latitude={s.latitude!}
+                                                    longitude={s.longitude!}
+                                                />
                                             ) : (
                                                 <MapPlaceholder label={s.mapLabel} />
                                             )}
