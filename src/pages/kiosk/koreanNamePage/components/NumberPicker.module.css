@@ -1,71 +1,56 @@
-/* src/components/kiosk/birthday/NumberPicker.module.css */
-
-.container {
+.root {
     position: relative;
-    width: 200px;
-    height: calc(64px * 3); /* 항상 3줄 보이도록 */
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family:
-        'Pretendard',
-        -apple-system,
-        BlinkMacSystemFont,
-        system-ui,
-        sans-serif;
+    width: 220px; /* 필요 시 조절 */
 }
 
-/* 가운데 선택 영역 – 정확히 한 줄 높이 */
-.centerGuide {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 64px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    /* 필요하면 상/하 border로 선택 영역 표시 가능 */
-}
-
-.scrollArea {
-    width: 100%;
-    height: 100%;
+.scroller {
     overflow-y: auto;
-    /* 패딩 제거: 가운데 정렬은 JS에서 scrollTop으로 맞춤 */
-    scroll-snap-type: y mandatory;
+    overflow-x: hidden;
+
     scroll-behavior: smooth;
-    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
 
+    /* 스크롤바 숨김(선택) */
     scrollbar-width: none;
-    -ms-overflow-style: none;
 }
-
-.scrollArea::-webkit-scrollbar {
+.scroller::-webkit-scrollbar {
     display: none;
 }
 
-/* 한 줄(row) 높이 = 64px → TS의 ROW_HEIGHT와 동일해야 함 */
 .item {
     width: 100%;
-    height: 64px;
     border: none;
     background: transparent;
-    font-size: 40px;
-    color: #c0c0c0;
-    cursor: pointer;
+    padding: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    scroll-snap-align: center;
+    font-family:
+        'Pretendard',
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.45);
+
+    cursor: pointer;
+    user-select: none;
 }
 
-/* 줄 간격은 margin 대신 line-height, padding 등으로 조절 (지금은 0) */
-/* .item + .item { margin-top: 8px; }  ← 사용하지 않음 */
-
 .selected {
-    font-weight: 700;
-    font-size: 48px;
-    color: #000000;
+    color: rgba(0, 0, 0, 0.92);
+}
+
+.centerHighlight {
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    border-radius: 18px;
+    background: rgba(250, 163, 146, 0.22);
+    pointer-events: none;
 }

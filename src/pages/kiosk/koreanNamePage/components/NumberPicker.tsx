@@ -1,18 +1,17 @@
-// src/components/kiosk/birthday/NumberPicker.tsx
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import styles from './NumberPicker.module.css';
 
-export interface NumberPickerProps {
+type NumberPickerProps = {
     start: number;
     end: number;
     step?: number;
     value: number;
     onChange: (next: number) => void;
     ariaLabel?: string;
-}
+};
 
-// 한 줄(row) 높이 – CSS .item 의 height와 반드시 동일
-const ROW_HEIGHT = 64;
+const ITEM_HEIGHT = 84;
+const VISIBLE_COUNT = 3; // ✅ 3개만 보이게
 
 export const NumberPicker: React.FC<NumberPickerProps> = ({
     start,
@@ -22,112 +21,121 @@ export const NumberPicker: React.FC<NumberPickerProps> = ({
     onChange,
     ariaLabel,
 }) => {
-    const scrollRef = useRef<HTMLDivElement | null>(null);
-    const scrollTimeoutRef = useRef<number | null>(null);
+    const scrollerRef = useRef<HTMLDivElement | null>(null);
+    const scrollEndTimer = useRef<number | null>(null);
 
-    const items = useMemo(() => {
-        const result: number[] = [];
-        for (let i = start; i <= end; i += step) {
-            result.push(i);
-        }
-        return result;
+    const numbers = useMemo(() => {
+        const arr: number[] = [];
+        for (let n = start; n <= end; n += step) arr.push(n);
+        return arr;
     }, [start, end, step]);
 
-    // value가 바뀔 때마다: "한 줄 위 + 선택 줄 + 한 줄 아래" 구조의 가운데에 오도록
+    const containerHeight = ITEM_HEIGHT * VISIBLE_COUNT;
+    const pad = (containerHeight - ITEM_HEIGHT) / 2; // ✅ 중앙(2번째) 정렬을 위한 여유
+
+    const clampIndex = useCallback(
+        (idx: number) => Math.max(0, Math.min(numbers.length - 1, idx)),
+        [numbers.length]
+    );
+
+    const indexFromValue = useCallback(
+        (v: number) => clampIndex(Math.round((v - start) / step)),
+        [clampIndex, start, step]
+    );
+
+    // ✅ DOM 스페이서 방식이므로 pad를 scrollTop에 더하지 않는다.
+    const scrollToIndex = useCallback(
+        (idx: number, behavior: ScrollBehavior = 'smooth') => {
+            const el = scrollerRef.current;
+            if (!el) return;
+
+            const clamped = clampIndex(idx);
+            const top = clamped * ITEM_HEIGHT;
+
+            const prefersReduced =
+                window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+
+            el.scrollTo({ top, behavior: prefersReduced ? 'auto' : behavior });
+        },
+        [clampIndex]
+    );
+
     useEffect(() => {
-        if (!scrollRef.current) return;
+        scrollToIndex(indexFromValue(value), 'auto');
+    }, [value, indexFromValue, scrollToIndex]);
 
-        const index = items.indexOf(value);
-        if (index === -1) return;
+    const commitByScrollTop = useCallback(
+        (scrollTop: number) => {
+            const raw = scrollTop / ITEM_HEIGHT;
+            const idx = clampIndex(Math.round(raw));
+            const nextValue = numbers[idx];
 
-        // 가운데 정렬: 선택 인덱스의 한 줄 위가 viewport의 top이 되도록
-        const targetTop = Math.max(0, index * ROW_HEIGHT - ROW_HEIGHT);
+            if (nextValue !== value) onChange(nextValue);
+            scrollToIndex(idx, 'smooth');
+        },
+        [clampIndex, numbers, value, onChange, scrollToIndex]
+    );
 
-        scrollRef.current.scrollTo({
-            top: targetTop,
-            behavior: 'auto',
-        });
-    }, [value, items]);
+    const onScroll = useCallback(() => {
+        const el = scrollerRef.current;
+        if (!el) return;
+
+        if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
+        scrollEndTimer.current = window.setTimeout(() => {
+            commitByScrollTop(el.scrollTop);
+        }, 80);
+    }, [commitByScrollTop]);
 
     useEffect(() => {
         return () => {
-            if (scrollTimeoutRef.current !== null) {
-                window.clearTimeout(scrollTimeoutRef.current);
-            }
+            if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
         };
     }, []);
 
-    const snapToNearest = (container: HTMLDivElement) => {
-        const scrollTop = container.scrollTop;
-
-        // scrollTop 이 "선택줄의 한 줄 위"이므로 +1 해서 선택 인덱스 계산
-        let index = Math.round(scrollTop / ROW_HEIGHT) + 1;
-
-        if (index < 0) index = 0;
-        if (index >= items.length) index = items.length - 1;
-
-        const nextValue = items[index];
-
-        if (typeof nextValue === 'number') {
-            // 선택값 갱신
-            if (nextValue !== value) {
-                onChange(nextValue);
-            }
-
-            // 다시 정확히 중앙 위치로 스냅
-            const targetTop = Math.max(0, index * ROW_HEIGHT - ROW_HEIGHT);
-            container.scrollTo({
-                top: targetTop,
-                behavior: 'smooth',
-            });
-        }
-    };
-
-    const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-        const el = e.currentTarget;
-
-        if (scrollTimeoutRef.current !== null) {
-            window.clearTimeout(scrollTimeoutRef.current);
-        }
-
-        // 스크롤 멈춘 뒤 80ms 후에만 스냅 & 선택값 변경
-        scrollTimeoutRef.current = window.setTimeout(() => {
-            snapToNearest(el);
-        }, 80);
-    };
-
-    const handleItemClick = (val: number) => {
-        onChange(val);
-    };
-
     return (
-        <div
-            className={styles.container}
-            role="listbox"
-            aria-label={ariaLabel}
-            aria-activedescendant={`${ariaLabel ?? 'number'}-${value}`}
-            tabIndex={0}
-        >
-            {/* 가운데 선택 영역 가이드 (정확히 1줄 높이) */}
-            <div className={styles.centerGuide} aria-hidden="true" />
+        <div className={styles.root} aria-label={ariaLabel}>
+            <div
+                className={styles.centerHighlight}
+                style={{ top: (containerHeight - ITEM_HEIGHT) / 2, height: ITEM_HEIGHT }}
+                aria-hidden="true"
+            />
 
-            <div ref={scrollRef} className={styles.scrollArea} onScroll={handleScroll}>
-                {items.map((num) => {
-                    const isSelected = num === value;
+            <div
+                ref={scrollerRef}
+                className={styles.scroller}
+                style={{ height: containerHeight }}
+                onScroll={onScroll}
+                role="listbox"
+                aria-label={ariaLabel}
+            >
+                {/* ✅ 위 스페이서: 끝값도 중앙에 올 수 있게 */}
+                <div style={{ height: pad }} aria-hidden="true" />
+
+                {numbers.map((n, idx) => {
+                    const selected = n === value;
                     return (
                         <button
-                            key={num}
-                            id={`${ariaLabel ?? 'number'}-${num}`}
+                            key={n}
                             type="button"
-                            className={`${styles.item} ${
-                                isSelected ? styles.selected : ''
-                            }`}
-                            onClick={() => handleItemClick(num)}
+                            role="option"
+                            aria-selected={selected}
+                            className={[
+                                styles.item,
+                                selected ? styles.selected : '',
+                            ].join(' ')}
+                            style={{ height: ITEM_HEIGHT }}
+                            onClick={() => {
+                                onChange(n);
+                                scrollToIndex(idx, 'smooth');
+                            }}
                         >
-                            {num.toString().padStart(2, '0')}
+                            {n}
                         </button>
                     );
                 })}
+
+                {/* ✅ 아래 스페이서 */}
+                <div style={{ height: pad }} aria-hidden="true" />
             </div>
         </div>
     );
